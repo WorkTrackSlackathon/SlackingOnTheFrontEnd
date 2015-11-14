@@ -36,7 +36,6 @@ let config = function($stateProvider, $urlRouterProvider) {
       controller: 'AddUserController',
       templateUrl: 'templates/add.tpl.html'
     });
-
 };
 
 config.$inject = ['$stateProvider', '$urlRouterProvider'];
