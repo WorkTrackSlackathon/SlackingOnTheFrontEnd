@@ -31,8 +31,10 @@ angular
   })
   .constant('siteURL','www.bob.com')
   .config(config)
-  .controller('RegisterController', RegisterController)
-  .controller('LoginController', LoginController)
+  .controller('RegisterController',RegisterController)
+  .controller('LoginController',LoginController)
+  .controller('UserController',UserController)
+  .controller('UserListController',UserListController)
   .service('UserService', UserService)
   .service('DataService', DataService)
 ;
