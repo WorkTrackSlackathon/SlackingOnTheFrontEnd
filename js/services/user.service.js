@@ -1,6 +1,6 @@
 let UserService = function($http, HEROKU, $cookies, $state) {
   
-  console.log(HEROKU);
+  // console.log(HEROKU);
   
   this.checkAuth = function () {
 
