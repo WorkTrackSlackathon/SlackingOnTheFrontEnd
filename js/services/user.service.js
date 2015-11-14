@@ -1,6 +1,7 @@
 let UserService = function($http, HEROKU, $cookies, $state) {
   
   console.log(HEROKU);
+  // let url = 'http://enigmatic-tundra-6262.herokuapp.com/';
   
   this.checkAuth = function () {
 
@@ -42,7 +43,7 @@ let UserService = function($http, HEROKU, $cookies, $state) {
 
   this.addEmployee = function (id) {
     let newEmployee = new Registration(id);
-    return $http.post(url, newEmployee, HEROKU.CONFIG);
+    return $http.post(HEROKU.URL + 'signup', newEmployee, HEROKU.CONFIG);
   };
 
 };

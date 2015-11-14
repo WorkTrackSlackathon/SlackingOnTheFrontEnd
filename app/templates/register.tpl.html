@@ -3,7 +3,7 @@
 <form ng-submit='addEmployee(newEmployee)'>
   <label>Name: <input placeholder='Name of Employee' ng-model='newEmployee.name'></label>
   <label>Email: <input placeholder='Employee Email' ng-model='newEmployee.email'></label>
-  <label>Password: <input placeholder='Employee Password' ng-model='newEmployee.password'></label>
+  <label>Password: <input type='password' placeholder='Employee Password' ng-model='newEmployee.password'></label>
   <label>Manager ID: <input placeholder="Manager's Email" ng-model='newEmployee.mgr_id'></label>
   <label>Role <input placeholder='Employee Role' ng-model='newEmployee.role'></label>
   <button>Submit</button>
