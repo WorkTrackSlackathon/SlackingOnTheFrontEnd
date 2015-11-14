@@ -1,6 +1,7 @@
 import angular from 'angular';
 import 'angular-ui-router';
 import 'angular-foundation';
+import 'angular-cookies';
 
 // Import the Config
 import config from './config';
@@ -9,10 +10,8 @@ import config from './config';
 import RegisterController from './controllers/register.controller';
 import AddUserController from './controllers/adduser.controller';
 import LoginController from './controllers/login.controller';
-import RegisterController from './controllers/register.controller';
 import UserController from './controllers/user.controller';
 import UserListController from './controllers/userlist.controller';
->>>>>>> master
 
 // Import Factories
 
@@ -21,24 +20,19 @@ import UserService from './services/user.service';
 import DataService from './services/data.service';
 
 angular
-  .module('app', ['ui.router','mm.foundation'])
+  .module('app', ['ui.router','mm.foundation', 'ngCookies'])
   .constant('HEROKU', {
     URL: 'http://enigmatic-tundra-6262.herokuapp.com/',
     CONFIG: {
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Token': '[SOME NUMBER]'
+        // 'Content-Type': 'application/json',
+        // 'Access-Token': '[SOME NUMBER]'
       }
     }
   })
   .config(config)
-  // .controller('SingleUserController', SingleController)
-  // .controller('ListUserController', ListController)
-  // .controller('AddUserController', AddController)
   .controller('RegisterController', RegisterController)
-  // .controller('UserController', UserController)
-  // .controller('ListUserController', ListUserController)
-  // .controller('AddUserController', AddUserController)
+  .controller('LoginController', LoginController)
   .service('UserService', UserService)
   .service('DataService', DataService)
 ;
