@@ -68,10 +68,10 @@ var _config2 = _interopRequireDefault(_config);
 // Import Services
 
 _angular2['default'].module('app', ['ui.router', 'mm.foundation']).constant('HEROKU', {
-  URL: 'wrecking-face.herokuapp.DOMINATED',
+  URL: 'http://enigmatic-tundra-6262.herokuapp.com/',
   CONFIG: {
     headers: {
-      'Method': '[method.type]',
+      'Content-Type': 'application/json',
       'Access-Token': '[SOME NUMBER]'
     }
   }
@@ -79,7 +79,7 @@ _angular2['default'].module('app', ['ui.router', 'mm.foundation']).constant('HER
 // .controller('UserController', UserController)
 // .controller('ListUserController', ListUserController)
 // .controller('AddUserController', AddUserController)
-.service('UserService', UserService);
+.service('UserService', UserService).service('DataService', DataService);
 
 },{"./config":1,"angular":6,"angular-foundation":3,"angular-ui-router":4}],3:[function(require,module,exports){
 /*

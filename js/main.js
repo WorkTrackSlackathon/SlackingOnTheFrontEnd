@@ -14,10 +14,10 @@ import config from './config';
 angular
   .module('app', ['ui.router','mm.foundation'])
   .constant('HEROKU', {
-    URL: 'wrecking-face.herokuapp.DOMINATED',
+    URL: 'http://enigmatic-tundra-6262.herokuapp.com/',
     CONFIG: {
       headers: {
-        'Method': '[method.type]',
+        'Content-Type': 'application/json',
         'Access-Token': '[SOME NUMBER]'
       }
     }
@@ -27,4 +27,5 @@ angular
   // .controller('ListUserController', ListUserController)
   // .controller('AddUserController', AddUserController)
   .service('UserService', UserService)
+  .service('DataService', DataService)
 ;
