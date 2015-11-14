@@ -3,12 +3,12 @@
 
   <form ng-submit="login(user)">
     <input placeholder="Email" ng-model="user.email">
-    <input placeholder="Password" ng-model="user.password">
+    <input placeholder="Password" type="password" ng-model="user.password">
     <button>Login</button>
   </form>
 
   <div>
     <span>Not already a user?</span>
-    <button ng-click="RegisterController">Register Now!</button>
+    <a href="#/register">Register Now!</span>
   </div>
 </div>
