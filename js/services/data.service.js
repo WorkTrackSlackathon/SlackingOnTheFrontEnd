@@ -32,6 +32,7 @@ let DataService = function($http,HEROKU,UserService) {
     let deleteURL = checkinURL+userid;
     return $http.delete(deleteURL, obj, HEROKU.CONFIG);
   };
+
 };
 
 DataService.$inject = ['$http','HEROKU','UserService'];

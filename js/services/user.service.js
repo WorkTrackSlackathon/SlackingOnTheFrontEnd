@@ -47,6 +47,24 @@ let UserService = function($http, HEROKU, $cookies, $state) {
     return $http.post(url, newEmployee, HEROKU.CONFIG);
   };
 
+  this.getEmployees = function () {
+    return $http({
+      url: HEROKU.URL,
+      headers: HEROKU.CONFIG.headers,
+      method: 'GET',
+      // cache: true
+    });
+  };
+
+  this.getEmployee = function (empId) {
+    return $http({
+      method: 'GET',
+      url: HEROKU.URL + '/' + empId,
+      headers: HEROKU.CONFIG.headers
+      // cache: true
+    });
+  };
+
 };
 
 UserService.$inject = ['$http', 'HEROKU', '$cookies', '$state'];
