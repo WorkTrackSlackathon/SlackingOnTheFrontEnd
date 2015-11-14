@@ -25,11 +25,11 @@ angular
     URL: 'http://enigmatic-tundra-6262.herokuapp.com/',
     CONFIG: {
       headers: {
-        // 'Content-Type': 'application/json',
-        // 'Access-Token': '[SOME NUMBER]'
+        'Content-Type': 'application/json'
       }
     }
   })
+  .constant('siteURL','www.bob.com')
   .config(config)
   .controller('RegisterController', RegisterController)
   .controller('LoginController', LoginController)

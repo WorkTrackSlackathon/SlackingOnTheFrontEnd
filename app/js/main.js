@@ -11,7 +11,7 @@ var config = function config($stateProvider, $urlRouterProvider) {
   $stateProvider.state('root', {
     abstract: true,
     templateUrl: 'templates/layout.tpl.html'
-  }).state('root.home', {
+  }).state('root.login', {
     url: '/',
     controller: 'LoginController',
     templateUrl: 'templates/login.tpl.html'
@@ -103,9 +103,13 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var UserController = function UserController() {};
+var UserController = function UserController($scope, UserService, DataService) {
 
-UserController.$inject = [''];
+  $scope.checkins = {};
+  $scope.locations = {};
+};
+
+UserController.$inject = ['$scope', 'UserService', 'DataService'];
 
 exports['default'] = UserController;
 module.exports = exports['default'];
@@ -128,9 +132,13 @@ module.exports = exports['default'];
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+<<<<<<< HEAD
+require('angular');
+=======
 var _angular = require('angular');
 
 var _angular2 = _interopRequireDefault(_angular);
+>>>>>>> master
 
 require('angular-ui-router');
 
@@ -188,7 +196,11 @@ _angular2['default'].module('app', ['ui.router', 'mm.foundation', 'ngCookies']).
   }
 }).config(_config2['default']).controller('RegisterController', _controllersRegisterController2['default']).controller('LoginController', _controllersLoginController2['default']).service('UserService', _servicesUserService2['default']).service('DataService', _servicesDataService2['default']);
 
+<<<<<<< HEAD
+},{"./config":1,"./controllers/adduser.controller":2,"./controllers/login.controller":3,"./controllers/register.controller":4,"./controllers/user.controller":5,"./controllers/userlist.controller":6,"./services/data.service":8,"./services/user.service":9,"angular":13,"angular-foundation":10,"angular-ui-router":11}],8:[function(require,module,exports){
+=======
 },{"./config":1,"./controllers/adduser.controller":2,"./controllers/login.controller":3,"./controllers/register.controller":4,"./controllers/user.controller":5,"./controllers/userlist.controller":6,"./services/data.service":8,"./services/user.service":9,"angular":15,"angular-cookies":11,"angular-foundation":12,"angular-ui-router":13}],8:[function(require,module,exports){
+>>>>>>> master
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -243,7 +255,7 @@ Object.defineProperty(exports, '__esModule', {
 });
 var UserService = function UserService($http, HEROKU, $cookies, $state) {
 
-  console.log(HEROKU);
+  // console.log(HEROKU);
 
   this.checkAuth = function () {
 
@@ -265,6 +277,15 @@ var UserService = function UserService($http, HEROKU, $cookies, $state) {
   };
 
   this.loginSuccess = function (res) {
+<<<<<<< HEAD
+    $cookies.put('authToken', res.data.auth_token);
+    HEROKU.CONFIG.headers['Access-Token'] = res.data.auth_token;
+    $state.go('root.home');
+  };
+
+  this.logout = function () {
+    $cookies.remove('authToken');
+=======
     $cookies.put('auth-token', res.data.auth_token);
     HEROKU.CONFIG.headers['Access-Token'] = res.data.auth_token;
     $state.go('root.list');
@@ -272,6 +293,7 @@ var UserService = function UserService($http, HEROKU, $cookies, $state) {
 
   this.logout = function () {
     $cookies.remove('auth-token');
+>>>>>>> master
     HEROKU.CONFIG.headers['Access-Token'] = null;
     $state.go('root.login');
   };
@@ -8609,7 +8631,11 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
+<<<<<<< HEAD
+},{}],12:[function(require,module,exports){
+=======
 },{}],14:[function(require,module,exports){
+>>>>>>> master
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -37514,11 +37540,19 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
+<<<<<<< HEAD
+},{}],13:[function(require,module,exports){
+require('./angular');
+module.exports = angular;
+
+},{"./angular":12}]},{},[7])
+=======
 },{}],15:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
 },{"./angular":14}]},{},[7])
+>>>>>>> master
 
 
 //# sourceMappingURL=main.js.map

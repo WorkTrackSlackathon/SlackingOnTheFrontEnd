@@ -7,7 +7,7 @@ let config = function($stateProvider, $urlRouterProvider) {
       abstract: true,
       templateUrl: 'templates/layout.tpl.html'
     })
-    .state('root.home', {
+    .state('root.login', {
       url: '/',
       controller: 'LoginController',
       templateUrl: 'templates/login.tpl.html'
