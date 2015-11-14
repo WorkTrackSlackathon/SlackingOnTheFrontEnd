@@ -23,8 +23,8 @@ angular
     }
   })
   .config(config)
-  .controller('SingleUserController', SingleController)
-  .controller('ListUserController', ListController)
-  .controller('AddUserController', AddController)
+  // .controller('UserController', UserController)
+  // .controller('ListUserController', ListUserController)
+  // .controller('AddUserController', AddUserController)
   .service('UserService', UserService)
 ;

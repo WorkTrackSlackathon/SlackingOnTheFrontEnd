@@ -75,7 +75,11 @@ _angular2['default'].module('app', ['ui.router', 'mm.foundation']).constant('HER
       'Access-Token': '[SOME NUMBER]'
     }
   }
-}).config(_config2['default']).controller('SingleUserController', SingleController).controller('ListUserController', ListController).controller('AddUserController', AddController).service('UserService', UserService);
+}).config(_config2['default'])
+// .controller('UserController', UserController)
+// .controller('ListUserController', ListUserController)
+// .controller('AddUserController', AddUserController)
+.service('UserService', UserService);
 
 },{"./config":1,"angular":6,"angular-foundation":3,"angular-ui-router":4}],3:[function(require,module,exports){
 /*
