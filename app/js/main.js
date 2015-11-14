@@ -105,8 +105,7 @@ var RegisterController = function RegisterController($scope, UserService, $state
     UserService.addEmployee(newUser).then(function (res) {
       $scope.newEmployee = {};
       console.log(res);
-    });
-    $state.go('root.list');
+    }).then($state.go('root.list'));
   };
 };
 
@@ -218,7 +217,7 @@ _angular2['default'].module('app', ['ui.router', 'mm.foundation', 'ngCookies']).
       'Content-Type': 'application/json'
     }
   }
-}).constant('siteURL', 'www.bob.com').config(_config2['default']).controller('UserListController', _controllersUserlistController2['default']).controller('RegisterController', _controllersRegisterController2['default']).controller('LoginController', _controllersLoginController2['default']).controller('NavController', _controllersNavController2['default']).service('UserService', _servicesUserService2['default']).service('DataService', _servicesDataService2['default']);
+}).constant('siteURL', 'www.bob.com').config(_config2['default']).controller('UserListController', _controllersUserlistController2['default']).controller('RegisterController', _controllersRegisterController2['default']).controller('LoginController', _controllersLoginController2['default']).controller('NavController', _controllersNavController2['default']).controller('UserController', _controllersUserController2['default']).service('UserService', _servicesUserService2['default']).service('DataService', _servicesDataService2['default']);
 
 },{"./config":1,"./controllers/adduser.controller":2,"./controllers/login.controller":3,"./controllers/nav.controller":4,"./controllers/register.controller":5,"./controllers/user.controller":6,"./controllers/userlist.controller":7,"./services/data.service":9,"./services/user.service":10,"angular":16,"angular-cookies":12,"angular-foundation":13,"angular-ui-router":14}],9:[function(require,module,exports){
 'use strict';
@@ -275,7 +274,7 @@ Object.defineProperty(exports, '__esModule', {
 });
 var UserService = function UserService($http, HEROKU, $cookies, $state) {
 
-  // console.log(HEROKU);
+  console.log(HEROKU);
 
   this.checkAuth = function () {
 
@@ -318,7 +317,7 @@ var UserService = function UserService($http, HEROKU, $cookies, $state) {
 
   this.addEmployee = function (id) {
     var newEmployee = new Registration(id);
-    return $http.post(url, newEmployee, HEROKU.CONFIG);
+    return $http.post(HEROKU.URL + 'signup', newEmployee, HEROKU.CONFIG);
   };
 
   this.getEmployees = function () {

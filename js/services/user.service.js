@@ -1,6 +1,6 @@
 let UserService = function($http, HEROKU, $cookies, $state) {
   
-  // console.log(HEROKU);
+  console.log(HEROKU);
   
   this.checkAuth = function () {
 
@@ -44,7 +44,7 @@ let UserService = function($http, HEROKU, $cookies, $state) {
 
   this.addEmployee = function (id) {
     let newEmployee = new Registration(id);
-    return $http.post(url, newEmployee, HEROKU.CONFIG);
+    return $http.post(HEROKU.URL + 'signup', newEmployee, HEROKU.CONFIG);
   };
 
   this.getEmployees = function () {

@@ -4,7 +4,6 @@ let UserController = function($scope, UserService, DataService) {
   $scope.locations = {};
   $scope.user = function(){};
 
-
 };
 
 UserController.$inject = ['$scope', 'UserService', 'DataService'];

@@ -36,6 +36,7 @@ angular
   .controller('RegisterController', RegisterController)
   .controller('LoginController', LoginController)
   .controller('NavController', NavController)
+  .controller('UserController',UserController)
   .service('UserService', UserService)
   .service('DataService', DataService)
 ;
