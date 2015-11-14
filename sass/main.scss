@@ -2,7 +2,40 @@
 // See Readme for a list of supported ones
 @import "foundation";
 
+// Layout & Background styling
+
 body {
   background: #e2ebf3;
   margin: 15px;
+}
+
+footer {
+  .footer {
+    width: 400px;
+    margin: 0 auto;
+    p {
+      margin: 10px auto;
+      text-align: center;
+      a {
+        text-decoration: none;
+        color: #FFFFFF;
+      }
+    }
+  }
+}
+
+// User List and Page Styling
+.userlist {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.userPage {
+  width: 80%;
+  .userinfo {
+    width: 36%;
+  }
+  .heatmap {
+    width: 36%;
+  }
 }

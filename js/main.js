@@ -11,7 +11,7 @@ import RegisterController from './controllers/register.controller';
 import AddUserController from './controllers/adduser.controller';
 import LoginController from './controllers/login.controller';
 import UserController from './controllers/user.controller';
-import UserListController from './controllers/userList.controller';
+import UserListController from './controllers/userlist.controller';
 
 // Import Factories
 
@@ -22,7 +22,7 @@ import DataService from './services/data.service';
 angular
   .module('app', ['ui.router','mm.foundation', 'ngCookies'])
   .constant('HEROKU', {
-    URL: 'http://enigmatic-tundra-6262.herokuapp.com/',
+    URL: 'https://enigmatic-tundra-6262.herokuapp.com/',
     CONFIG: {
       headers: {
         'Content-Type': 'application/json'

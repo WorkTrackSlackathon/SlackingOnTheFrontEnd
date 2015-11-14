@@ -105,6 +105,13 @@ Object.defineProperty(exports, '__esModule', {
 });
 var UserController = function UserController($scope, UserService, DataService) {
 
+  // Fetch the employee Data
+  $scope.getEmployee = function (userid) {
+    return UserService.getEmployee(userid).then(function (res) {
+      $scope.employee = {};
+      console.log(employee);
+    });
+  };
   $scope.checkins = {};
   $scope.locations = {};
   // $scope.user = function() {};
@@ -167,9 +174,9 @@ var _controllersUserController = require('./controllers/user.controller');
 
 var _controllersUserController2 = _interopRequireDefault(_controllersUserController);
 
-var _controllersUserListController = require('./controllers/userList.controller');
+var _controllersUserlistController = require('./controllers/userlist.controller');
 
-var _controllersUserListController2 = _interopRequireDefault(_controllersUserListController);
+var _controllersUserlistController2 = _interopRequireDefault(_controllersUserlistController);
 
 // Import Factories
 
@@ -184,15 +191,15 @@ var _servicesDataService = require('./services/data.service');
 var _servicesDataService2 = _interopRequireDefault(_servicesDataService);
 
 _angular2['default'].module('app', ['ui.router', 'mm.foundation', 'ngCookies']).constant('HEROKU', {
-  URL: 'http://enigmatic-tundra-6262.herokuapp.com/',
+  URL: 'https://enigmatic-tundra-6262.herokuapp.com/',
   CONFIG: {
     headers: {
       'Content-Type': 'application/json'
     }
   }
-}).constant('siteURL', 'www.bob.com').config(_config2['default']).controller('RegisterController', _controllersRegisterController2['default']).controller('LoginController', _controllersLoginController2['default']).controller('UserController', _controllersUserController2['default']).controller('UserListController', _controllersUserListController2['default']).service('UserService', _servicesUserService2['default']).service('DataService', _servicesDataService2['default']);
+}).constant('siteURL', 'www.bob.com').config(_config2['default']).controller('RegisterController', _controllersRegisterController2['default']).controller('LoginController', _controllersLoginController2['default']).controller('UserController', _controllersUserController2['default']).controller('UserListController', _controllersUserlistController2['default']).service('UserService', _servicesUserService2['default']).service('DataService', _servicesDataService2['default']);
 
-},{"./config":1,"./controllers/adduser.controller":2,"./controllers/login.controller":3,"./controllers/register.controller":4,"./controllers/user.controller":5,"./controllers/userList.controller":6,"./services/data.service":8,"./services/user.service":9,"angular":15,"angular-cookies":11,"angular-foundation":12,"angular-ui-router":13}],8:[function(require,module,exports){
+},{"./config":1,"./controllers/adduser.controller":2,"./controllers/login.controller":3,"./controllers/register.controller":4,"./controllers/user.controller":5,"./controllers/userlist.controller":6,"./services/data.service":8,"./services/user.service":9,"angular":15,"angular-cookies":11,"angular-foundation":12,"angular-ui-router":13}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -250,14 +257,9 @@ var UserService = function UserService($http, HEROKU, $cookies, $state) {
   // console.log(HEROKU);
 
   this.checkAuth = function () {
-
     var token = $cookies.get('auth-token');
-
-    HEROKU.CONFIG.headers['Access-Token'] = token;
-
-    // Something's funky here:
     if (token) {
-      return $http.get(HEROKU.URL + 'check', HEROKU.CONFIG);
+      HEROKU.CONFIG.headers['Access-Token'] = token;
     } else {
       $state.go('root.login');
     }
@@ -286,6 +288,10 @@ var UserService = function UserService($http, HEROKU, $cookies, $state) {
     this.password = user.password;
     this.mgr_id = user.mgr_id;
     this.role = user.role;
+  };
+
+  this.getEmployees = function () {
+    return $http.get(HEROKU.URL + 'employees', HEROKU.CONFIG);
   };
 
   this.addEmployee = function (id) {

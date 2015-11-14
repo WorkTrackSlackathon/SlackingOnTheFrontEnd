@@ -3,18 +3,12 @@ let UserService = function($http, HEROKU, $cookies, $state) {
   // console.log(HEROKU);
   
   this.checkAuth = function () {
-
     let token = $cookies.get('auth-token');
-
-    HEROKU.CONFIG.headers['Access-Token'] = token;
-    
-    // Something's funky here:
     if (token) {
-      return $http.get(HEROKU.URL + 'check', HEROKU.CONFIG);
+      HEROKU.CONFIG.headers['Access-Token'] = token;
     } else {
       $state.go('root.login');
     }
-
   };
 
   this.sendLogin = function (userObj) {
@@ -40,6 +34,10 @@ let UserService = function($http, HEROKU, $cookies, $state) {
     this.password = user.password;
     this.mgr_id = user.mgr_id;
     this.role = user.role;
+  };
+
+  this.getEmployees = function() {
+    return $http.get(HEROKU.URL + 'employees', HEROKU.CONFIG);
   };
 
   this.addEmployee = function (id) {
