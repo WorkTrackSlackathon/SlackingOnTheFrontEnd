@@ -6,11 +6,13 @@ import 'angular-foundation';
 import config from './config';
 
 // Import Controllers
+import RegisterController from './controllers/register.controller';
 import AddUserController from './controllers/adduser.controller';
 import LoginController from './controllers/login.controller';
 import RegisterController from './controllers/register.controller';
 import UserController from './controllers/user.controller';
 import UserListController from './controllers/userlist.controller';
+>>>>>>> master
 
 // Import Factories
 
@@ -30,6 +32,10 @@ angular
     }
   })
   .config(config)
+  // .controller('SingleUserController', SingleController)
+  // .controller('ListUserController', ListController)
+  // .controller('AddUserController', AddController)
+  .controller('RegisterController', RegisterController)
   // .controller('UserController', UserController)
   // .controller('ListUserController', ListUserController)
   // .controller('AddUserController', AddUserController)
