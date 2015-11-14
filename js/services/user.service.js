@@ -1,12 +1,12 @@
 let UserService = function($http, HEROKU, $cookies, $state) {
   
-  console.log(HEROKU);
+  // console.log(HEROKU);
   
   this.checkAuth = function () {
 
     let token = $cookies.get('authToken');
 
-    HEROKU.CONFIG.headers['X-AUTH-TOKEN'] = token;
+    HEROKU.CONFIG.headers['Access-Token'] = token;
     
     if (token) {
       return $http.get(HEROKU.URL + 'check', HEROKU.CONFIG);
@@ -22,19 +22,28 @@ let UserService = function($http, HEROKU, $cookies, $state) {
 
   this.loginSuccess = function (res) {
     $cookies.put('authToken', res.data.auth_token);
-    HEROKU.CONFIG.headers['X-AUTH-TOKEN'] = res.data.auth_token;
+    HEROKU.CONFIG.headers['Access-Token'] = res.data.auth_token;
     $state.go('root.home');
   };
 
   this.logout = function () {
     $cookies.remove('authToken');
-    HEROKU.CONFIG.headers['X-AUTH-TOKEN'] = null;
+    HEROKU.CONFIG.headers['Access-Token'] = null;
     $state.go('root.login');
   };
 
-  this.register = function () {
+  let register = function (name,email,pass,mgrId,role) {
     // take data from template and send (post request) to server
     // $cookies.post()
+    let newuser = {User:{
+        this.name = name,
+        this.email = email,
+        this.password = pass,
+        this.mgr_id = mgrId,
+        this.role = role
+      }
+    }
+    return $http.post(HEROKU.URL + 'signup', newuser, HEROKU.CONFIG);
   };
 
 };

@@ -2,8 +2,24 @@
   <div class="userInfo">
     <h3>Employee #{{user.id}}</h3>
     <ul>
-      <li>Last Check-in: {{ user.checkin.timeout}}</li>
-      <li>Last Location: {{ user.location }}</li>
+      <li>Last Check-in: {{ employee.checkin.timeout}}</li>
+      <li>Last Location: {{ employee.location }}</li>
     </ul>
+  </div>
+  <div class="heatmap"></div>
+  <div class="userHistory">
+    <h3>Check-in History</h3>
+    <table>
+      <tr>
+        <th>Location</th>
+        <th>Check-in Time</th>
+        <th>Check-Out Time</th>
+      </tr>
+      <tr ng-repeat="checkin in checkins">
+        <td>checkin.location</td>
+        <td>checkin.timein</td>
+        <td>checkin.timeout</td>
+      </tr>
+    </table>
   </div>
 </div>

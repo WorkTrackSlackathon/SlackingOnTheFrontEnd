@@ -1,3 +1,4 @@
+import 'angular';
 import 'angular-ui-router';
 import 'angular-foundation';
 
@@ -28,6 +29,7 @@ angular
       }
     }
   })
+  .constant('siteURL','www.bob.com')
   .config(config)
   // .controller('UserController', UserController)
   // .controller('ListUserController', ListUserController)

@@ -1,9 +1,12 @@
-let UserController = function() {
+let UserController = function($scope, UserService, DataService) {
   
-  
+  $scope.checkins = {};
+  $scope.locations = {};
+  $scope.user = function()
+
 
 };
 
-UserController.$inject = [''];
+UserController.$inject = ['$scope', 'UserService', 'DataService'];
 
 export default UserController;
