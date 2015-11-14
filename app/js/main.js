@@ -45,6 +45,28 @@ module.exports = exports['default'];
 },{}],2:[function(require,module,exports){
 'use strict';
 
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var RegisterController = function RegisterController($scope, UserService, $state) {
+
+  $scope.addEmployee = function (newUser) {
+    UserService.addEmployee(newUser).then(function (res) {
+      $scope.newEmployee = {};
+      console.log(res);
+    });
+    $state.go('root.list');
+  };
+};
+
+RegisterController.$inject = ['$scope', 'UserService', '$state'];
+
+exports['default'] = RegisterController;
+module.exports = exports['default'];
+
+},{}],3:[function(require,module,exports){
+'use strict';
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _angular = require('angular');
@@ -63,9 +85,17 @@ var _config2 = _interopRequireDefault(_config);
 
 // Import Controllers
 
+var _controllersRegisterController = require('./controllers/register.controller');
+
+var _controllersRegisterController2 = _interopRequireDefault(_controllersRegisterController);
+
 // Import Factories
 
 // Import Services
+
+var _servicesUserService = require('./services/user.service');
+
+var _servicesUserService2 = _interopRequireDefault(_servicesUserService);
 
 _angular2['default'].module('app', ['ui.router', 'mm.foundation']).constant('HEROKU', {
   URL: 'wrecking-face.herokuapp.DOMINATED',
@@ -75,9 +105,71 @@ _angular2['default'].module('app', ['ui.router', 'mm.foundation']).constant('HER
       'Access-Token': '[SOME NUMBER]'
     }
   }
-}).config(_config2['default']).controller('SingleUserController', SingleController).controller('ListUserController', ListController).controller('AddUserController', AddController).service('UserService', UserService);
+}).config(_config2['default'])
+// .controller('SingleUserController', SingleController)
+// .controller('ListUserController', ListController)
+// .controller('AddUserController', AddController)
+.controller('RegisterController', _controllersRegisterController2['default']).service('UserService', _servicesUserService2['default']);
 
-},{"./config":1,"angular":6,"angular-foundation":3,"angular-ui-router":4}],3:[function(require,module,exports){
+},{"./config":1,"./controllers/register.controller":2,"./services/user.service":4,"angular":8,"angular-foundation":5,"angular-ui-router":6}],4:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var UserService = function UserService($http, HEROKU, $cookies, $state) {
+
+  console.log(HEROKU);
+
+  this.checkAuth = function () {
+
+    var token = $cookies.get('authToken');
+
+    HEROKU.CONFIG.headers['Access-Token'] = token;
+
+    if (token) {
+      return $http.get(HEROKU.URL + 'check', HEROKU.CONFIG);
+    } else {
+      $state.go('root.login');
+    }
+  };
+
+  this.sendLogin = function (userObj) {
+    return $http.post(HEROKU.URL + 'login', userObj, HEROKU.CONFIG);
+  };
+
+  this.loginSuccess = function (res) {
+    $cookies.put('authToken', res.data.auth_token);
+    HEROKU.CONFIG.headers['Access-Token'] = res.data.auth_token;
+    $state.go('root.home');
+  };
+
+  this.logout = function () {
+    $cookies.remove('authToken');
+    HEROKU.CONFIG.headers['Access-Token'] = null;
+    $state.go('root.login');
+  };
+
+  var Registration = function Registration(user) {
+    this.name = user.name;
+    this.email = user.email;
+    this.password = user.password;
+    this.mgr_id = user.mgr_id;
+    this.role = user.role;
+  };
+
+  this.addEmployee = function (id) {
+    var newEmployee = new Registration(id);
+    return $http.post(url, newEmployee, HEROKU.CONFIG);
+  };
+};
+
+UserService.$inject = ['$http', 'HEROKU', '$cookies', '$state'];
+
+exports['default'] = UserService;
+module.exports = exports['default'];
+
+},{}],5:[function(require,module,exports){
 /*
  * angular-mm-foundation
  * http://pineconellc.github.io/angular-foundation/
@@ -3693,7 +3785,7 @@ angular.module("template/typeahead/typeahead-popup.html", []).run(["$templateCac
     "");
 }]);
 
-},{}],4:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.15
@@ -8064,7 +8156,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],5:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -36969,11 +37061,11 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":5}]},{},[2])
+},{"./angular":7}]},{},[3])
 
 
 //# sourceMappingURL=main.js.map
