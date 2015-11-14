@@ -16,7 +16,7 @@ let config = function($stateProvider, $urlRouterProvider) {
       url: '/logout',
       controller: 'LogoutController'
     })
-    .state('root.registration' {
+    .state('root.registration', {
       url: '/register',
       controller: 'RegisterController',
       templateUrl: 'templates/register.tpl.html'
@@ -36,7 +36,6 @@ let config = function($stateProvider, $urlRouterProvider) {
       controller: 'AddUserController',
       templateUrl: 'templates/add.tpl.html'
     });
-
 };
 
 config.$inject = ['$stateProvider', '$urlRouterProvider'];
