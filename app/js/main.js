@@ -106,7 +106,11 @@ var UserController = function UserController($scope, UserService, DataService) {
 
   $scope.checkins = {};
   $scope.locations = {};
+<<<<<<< HEAD
   $scope.user = function () {};
+=======
+  // $scope.user = function() {};
+>>>>>>> master
 };
 
 UserController.$inject = ['$scope', 'UserService', 'DataService'];
@@ -166,9 +170,9 @@ var _controllersUserController = require('./controllers/user.controller');
 
 var _controllersUserController2 = _interopRequireDefault(_controllersUserController);
 
-var _controllersUserlistController = require('./controllers/userlist.controller');
+var _controllersUserListController = require('./controllers/userList.controller');
 
-var _controllersUserlistController2 = _interopRequireDefault(_controllersUserlistController);
+var _controllersUserListController2 = _interopRequireDefault(_controllersUserListController);
 
 // Import Factories
 
@@ -186,6 +190,7 @@ _angular2['default'].module('app', ['ui.router', 'mm.foundation', 'ngCookies']).
   URL: 'http://enigmatic-tundra-6262.herokuapp.com/',
   CONFIG: {
     headers: {
+<<<<<<< HEAD
       // 'Content-Type': 'application/json',
       // 'Access-Token': '[SOME NUMBER]'
       'Content-Type': 'application/json'
@@ -194,6 +199,14 @@ _angular2['default'].module('app', ['ui.router', 'mm.foundation', 'ngCookies']).
 }).constant('siteURL', 'www.bob.com').config(_config2['default']).controller('RegisterController', _controllersRegisterController2['default']).controller('LoginController', _controllersLoginController2['default']).service('UserService', _servicesUserService2['default']).service('DataService', _servicesDataService2['default']);
 
 },{"./config":1,"./controllers/adduser.controller":2,"./controllers/login.controller":3,"./controllers/register.controller":4,"./controllers/user.controller":5,"./controllers/userlist.controller":6,"./services/data.service":8,"./services/user.service":9,"angular":15,"angular-cookies":11,"angular-foundation":12,"angular-ui-router":13}],8:[function(require,module,exports){
+=======
+      'Content-Type': 'application/json'
+    }
+  }
+}).constant('siteURL', 'www.bob.com').config(_config2['default']).controller('RegisterController', _controllersRegisterController2['default']).controller('LoginController', _controllersLoginController2['default']).controller('UserController', _controllersUserController2['default']).controller('UserListController', _controllersUserListController2['default']).service('UserService', _servicesUserService2['default']).service('DataService', _servicesDataService2['default']);
+
+},{"./config":1,"./controllers/adduser.controller":2,"./controllers/login.controller":3,"./controllers/register.controller":4,"./controllers/user.controller":5,"./controllers/userList.controller":6,"./services/data.service":8,"./services/user.service":9,"angular":15,"angular-cookies":11,"angular-foundation":12,"angular-ui-router":13}],8:[function(require,module,exports){
+>>>>>>> master
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
