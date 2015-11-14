@@ -11,7 +11,7 @@ import RegisterController from './controllers/register.controller';
 import AddUserController from './controllers/adduser.controller';
 import LoginController from './controllers/login.controller';
 import UserController from './controllers/user.controller';
-import UserListController from './controllers/userlist.controller';
+import UserListController from './controllers/userList.controller';
 
 // Import Factories
 
@@ -31,8 +31,10 @@ angular
   })
   .constant('siteURL','www.bob.com')
   .config(config)
-  .controller('RegisterController', RegisterController)
-  .controller('LoginController', LoginController)
+  .controller('RegisterController',RegisterController)
+  .controller('LoginController',LoginController)
+  .controller('UserController',UserController)
+  .controller('UserListController',UserListController)
   .service('UserService', UserService)
   .service('DataService', DataService)
 ;
