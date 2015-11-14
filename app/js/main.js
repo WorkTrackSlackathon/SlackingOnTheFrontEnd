@@ -48,6 +48,7 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
 var LoginController = function LoginController($scope, UserService, $cookies, $state) {
 
   $scope.login = function (user) {
@@ -59,17 +60,55 @@ var LoginController = function LoginController($scope, UserService, $cookies, $s
 
 LoginController.$inject = ['$scope', 'UserService', '$cookies', '$state'];
 
+
 exports['default'] = LoginController;
 module.exports = exports['default'];
 
-},{}],3:[function(require,module,exports){
+
+},{}],4:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var RegisterController = function RegisterController() {};
+
+RegisterController.$inject = [''];
+
+exports['default'] = RegisterController;
+module.exports = exports['default'];
+
+},{}],5:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var UserController = function UserController() {};
+
+UserController.$inject = [''];
+
+exports['default'] = UserController;
+module.exports = exports['default'];
+
+},{}],6:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var UserListController = function UserListController() {};
+
+UserListController.$inject = [''];
+
+
+exports['default'] = UserListController;
+module.exports = exports['default'];
+
+},{}],7:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _angular = require('angular');
-
-var _angular2 = _interopRequireDefault(_angular);
 
 require('angular-ui-router');
 
@@ -83,9 +122,29 @@ var _config2 = _interopRequireDefault(_config);
 
 // Import Controllers
 
+
+var _controllersAdduserController = require('./controllers/adduser.controller');
+
+var _controllersAdduserController2 = _interopRequireDefault(_controllersAdduserController);
+
+
 var _controllersLoginController = require('./controllers/login.controller');
 
 var _controllersLoginController2 = _interopRequireDefault(_controllersLoginController);
+
+
+var _controllersRegisterController = require('./controllers/register.controller');
+
+var _controllersRegisterController2 = _interopRequireDefault(_controllersRegisterController);
+
+var _controllersUserController = require('./controllers/user.controller');
+
+var _controllersUserController2 = _interopRequireDefault(_controllersUserController);
+
+var _controllersUserlistController = require('./controllers/userlist.controller');
+
+var _controllersUserlistController2 = _interopRequireDefault(_controllersUserlistController);
+
 
 // Import Factories
 
@@ -95,17 +154,75 @@ var _servicesUserService = require('./services/user.service');
 
 var _servicesUserService2 = _interopRequireDefault(_servicesUserService);
 
-_angular2['default'].module('app', ['ui.router', 'mm.foundation']).constant('HEROKU', {
+
+var _servicesDataService = require('./services/data.service');
+
+var _servicesDataService2 = _interopRequireDefault(_servicesDataService);
+
+angular.module('app', ['ui.router', 'mm.foundation']).constant('HEROKU', {
+
   URL: 'http://enigmatic-tundra-6262.herokuapp.com/',
   CONFIG: {
     headers: {
-      'Method': '[method.type]',
+      'Content-Type': 'application/json',
       'Access-Token': '[SOME NUMBER]'
     }
   }
-}).config(_config2['default']).controller('LoginController', _controllersLoginController2['default']).service('UserService', _servicesUserService2['default']);
 
-},{"./config":1,"./controllers/login.controller":2,"./services/user.service":4,"angular":8,"angular-foundation":5,"angular-ui-router":6}],4:[function(require,module,exports){
+}).config(_config2['default'])
+// .controller('UserController', UserController)
+// .controller('ListUserController', ListUserController)
+// .controller('AddUserController', AddUserController)
+.service('UserService', _servicesUserService2['default']).service('DataService', _servicesDataService2['default']);
+
+},{"./config":1,"./controllers/adduser.controller":2,"./controllers/login.controller":3,"./controllers/register.controller":4,"./controllers/user.controller":5,"./controllers/userlist.controller":6,"./services/data.service":8,"./services/user.service":9,"angular-foundation":10,"angular-ui-router":11}],8:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var DataService = function DataService($http, HEROKU, UserService) {
+
+  var locateURL = HEROKU.URL + 'locations/';
+  var checkinURL = HEROKU.URL + 'checkins/';
+
+  this.getLocations = function (userid) {
+    return $http({
+      url: locateURL + userid,
+      headers: HEROKU.CONFIG.headers,
+      method: 'GET',
+      cache: true
+    });
+  };
+
+  this.getCheckins = function (userid) {
+    return $http({
+      url: checkinURL + userid,
+      headers: HEROKU.CONFIG.headers,
+      method: 'GET',
+      cache: true
+    });
+  };
+
+  // vvvvvvv Not yet implemented vvvvvvv
+
+  this.editCheckin = function (userid, obj) {
+    var editURL = checkinURL + userid;
+    return $http.put(editURL, obj, HEROKU.CONFIG);
+  };
+
+  this.deleteCheckin = function (userid) {
+    var deleteURL = checkinURL + userid;
+    return $http['delete'](deleteURL, obj, HEROKU.CONFIG);
+  };
+};
+
+DataService.$inject = ['$http', 'HEROKU', 'UserService'];
+
+exports['default'] = DataService;
+module.exports = exports['default'];
+
+},{}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -117,9 +234,10 @@ var UserService = function UserService($http, HEROKU, $cookies, $state) {
 
   this.checkAuth = function () {
 
-    var token = $cookies.get('auth_token');
+    var token = $cookies.get('authToken');
 
-    HEROKU.CONFIG.headers['Access-Token'] = token;
+    HEROKU.CONFIG.headers['X-AUTH-TOKEN'] = token;
+
 
     if (token) {
       return $http.get(HEROKU.URL + 'check', HEROKU.CONFIG);
@@ -129,17 +247,22 @@ var UserService = function UserService($http, HEROKU, $cookies, $state) {
   };
 
   this.sendLogin = function (userObj) {
+
     console.log(userObj);
+
     return $http.post(HEROKU.URL + 'login', userObj, HEROKU.CONFIG);
   };
 
   this.loginSuccess = function (res) {
+
     $cookies.put('auth_token', res.data.auth_token);
     HEROKU.CONFIG.headers['Access-Token'] = res.data.auth_token;
+
     $state.go('root.home');
   };
 
   this.logout = function () {
+
     $cookies.remove('auth_token');
     HEROKU.CONFIG.headers['Access-Token'] = null;
     $state.go('root.login');
@@ -156,6 +279,7 @@ var UserService = function UserService($http, HEROKU, $cookies, $state) {
   this.register = function (user) {
     var account = new Registration(user);
     return $http.post(HEROKU.URL, account, HEROKU.CONFIG);
+
   };
 };
 
@@ -164,7 +288,9 @@ UserService.$inject = ['$http', 'HEROKU', '$cookies', '$state'];
 exports['default'] = UserService;
 module.exports = exports['default'];
 
-},{}],5:[function(require,module,exports){
+
+},{}],10:[function(require,module,exports){
+
 /*
  * angular-mm-foundation
  * http://pineconellc.github.io/angular-foundation/
@@ -3780,7 +3906,9 @@ angular.module("template/typeahead/typeahead-popup.html", []).run(["$templateCac
     "");
 }]);
 
-},{}],6:[function(require,module,exports){
+
+},{}],11:[function(require,module,exports){
+
 /**
  * State-based routing for AngularJS
  * @version v0.2.15
@@ -8151,6 +8279,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
+
 },{}],7:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
@@ -37061,6 +37190,7 @@ require('./angular');
 module.exports = angular;
 
 },{"./angular":7}]},{},[3])
+
 
 
 //# sourceMappingURL=main.js.map
