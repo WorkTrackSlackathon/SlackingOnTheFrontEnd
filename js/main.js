@@ -6,15 +6,18 @@ import 'angular-foundation';
 import config from './config';
 
 // Import Controllers
+import LoginController from './controllers/login.controller';
 
 // Import Factories
 
 // Import Services
+import UserService from './services/user.service';
+
 
 angular
   .module('app', ['ui.router','mm.foundation'])
   .constant('HEROKU', {
-    URL: 'wrecking-face.herokuapp.DOMINATED',
+    URL: 'http://enigmatic-tundra-6262.herokuapp.com/',
     CONFIG: {
       headers: {
         'Method': '[method.type]',
@@ -23,8 +26,6 @@ angular
     }
   })
   .config(config)
-  .controller('SingleUserController', SingleController)
-  .controller('ListUserController', ListController)
-  .controller('AddUserController', AddController)
+  .controller('LoginController', LoginController)
   .service('UserService', UserService)
 ;
