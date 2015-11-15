@@ -1,5 +1,5 @@
 let LoginController = function($scope, UserService, $cookies, $state) {
-  
+
   $scope.login = function (user) {
     UserService.sendLogin(user)
     .then( (res) => {

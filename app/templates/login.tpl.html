@@ -1,7 +1,14 @@
-<h3>Login</h3>
+<div class="login">
+  <h3>Login</h3>
 
-<form ng-submit="login(user)">
-  <input placeholder="Email" ng-model="user.email">
-  <input placeholder="Password" ng-model="user.password">
-  <button>Login</button>
-</form>
+  <form ng-submit="login(user)">
+    <input placeholder="Email" ng-model="user.email">
+    <input placeholder="Password" type="password" ng-model="user.password">
+    <button>Login</button>
+  </form>
+
+  <div>
+    <span>Not already a user?</span>
+    <a href="#/register">Register Now!</span>
+  </div>
+</div>

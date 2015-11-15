@@ -14,7 +14,7 @@ let config = function($stateProvider, $urlRouterProvider) {
     })
     .state('root.logout', {
       url: '/logout',
-      controller: 'LogoutController'
+      controller: 'NavController'
     })
     .state('root.registration', {
       url: '/register',
