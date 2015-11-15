@@ -1,4 +1,4 @@
-let UserController = function($scope, UserService, DataService) {
+let UserController = function($scope, UserService, DataService, $stateParams) {
   
   UserService.checkAuth();
 
@@ -12,8 +12,13 @@ let UserController = function($scope, UserService, DataService) {
   $scope.locations = {};
   $scope.user = function(){};
 
+  UserService.getEmployee($stateParams.userId).then((res) => {
+    console.log(res.data);
+    $scope.employee = res.data;
+  });
+
 };
 
-UserController.$inject = ['$scope', 'UserService', 'DataService'];
+UserController.$inject = ['$scope', 'UserService', 'DataService', '$stateParams'];
 
 export default UserController;
