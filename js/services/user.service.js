@@ -59,6 +59,15 @@ let UserService = function($http, HEROKU, $cookies, $state) {
     });
   };
 
+  this.getEmpCheckins = function (userId) {
+    return $http({
+      url: HEROKU.URL + 'users/' + userId + '/checkins',
+      headers: HEROKU.CONFIG.headers,
+      method: 'GET',
+      // cache: true
+    });
+  };
+
 };
 
 UserService.$inject = ['$http', 'HEROKU', '$cookies', '$state'];
