@@ -104,7 +104,6 @@ var RegisterController = function RegisterController($scope, UserService, $state
   $scope.addEmployee = function (newUser) {
     UserService.addEmployee(newUser).then(function (res) {
       $scope.newEmployee = {};
-      // console.log(res);
     }).then($state.go('root.list'));
   };
 };
@@ -275,8 +274,6 @@ Object.defineProperty(exports, '__esModule', {
 });
 var UserService = function UserService($http, HEROKU, $cookies, $state) {
 
-  // console.log(HEROKU);
-
   this.checkAuth = function () {
     var token = $cookies.get('auth-token');
     if (token) {
@@ -286,23 +283,7 @@ var UserService = function UserService($http, HEROKU, $cookies, $state) {
     }
   };
 
-  // this.checkAuth = function () {
-
-  //   let token = $cookies.get('auth-token');
-
-  //   HEROKU.CONFIG.headers['Access-Token'] = token;
-
-  //   // Something's funky here:
-  //   if (token) {
-  //     return $http.get(HEROKU.URL + 'check', HEROKU.CONFIG);
-  //   } else {
-  //     $state.go('root.login');
-  //   }
-
-  // };
-
   this.sendLogin = function (userObj) {
-    // console.log(userObj);
     return $http.post(HEROKU.URL + 'login', userObj, HEROKU.CONFIG);
   };
 
@@ -327,7 +308,6 @@ var UserService = function UserService($http, HEROKU, $cookies, $state) {
   };
 
   this.addEmployee = function (id) {
-    // console.log(id);
     var newEmployee = new Registration(id);
     return $http.post(HEROKU.URL + 'signup', newEmployee, HEROKU.CONFIG);
   };
