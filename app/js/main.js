@@ -146,11 +146,11 @@ Object.defineProperty(exports, '__esModule', {
 });
 var UserListController = function UserListController($scope, UserService) {
 
-  // UserService.getEmployees().then( (res) => {
-  //   $scope.employees = res.data.results;
-  // });
-  // console.log(UserService);
-
+  // Something about this is incorrect:
+  UserService.getEmployees().then(function (res) {
+    $scope.employees = res.data.results;
+  });
+  console.log(UserService);
 };
 
 UserListController.$inject = ['$scope', 'UserService'];
@@ -295,8 +295,8 @@ var UserService = function UserService($http, HEROKU, $cookies, $state) {
   };
 
   this.loginSuccess = function (res) {
-    $cookies.put('auth-token', res.data.auth_token);
-    HEROKU.CONFIG.headers['Access-Token'] = res.data.auth_token;
+    $cookies.put('auth-token', res.data.user.auth_token);
+    HEROKU.CONFIG.headers['Access-Token'] = res.data.user.auth_token;
     $state.go('root.list');
   };
 
@@ -325,7 +325,7 @@ var UserService = function UserService($http, HEROKU, $cookies, $state) {
 
   this.getEmployees = function () {
     return $http({
-      url: HEROKU.URL,
+      url: HEROKU.URL + 'users',
       headers: HEROKU.CONFIG.headers,
       method: 'GET'
     });

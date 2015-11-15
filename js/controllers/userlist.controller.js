@@ -1,9 +1,10 @@
 let UserListController = function($scope, UserService) {
   
-  // UserService.getEmployees().then( (res) => {
-  //   $scope.employees = res.data.results;
-  // });
-  // console.log(UserService);
+  // Something about this is incorrect:
+  UserService.getEmployees().then( (res) => {
+    $scope.employees = res.data.results;
+  });
+  console.log(UserService);
 
 };
 
