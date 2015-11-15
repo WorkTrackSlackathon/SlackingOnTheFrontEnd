@@ -27,11 +27,11 @@ var config = function config($stateProvider, $urlRouterProvider) {
     controller: 'UserListController',
     templateUrl: 'templates/userList.tpl.html'
   }).state('root.user', {
-    url: '/user/:userId',
+    url: '/users/:userId',
     controller: 'UserController',
     templateUrl: 'templates/user.tpl.html'
   }).state('root.add', {
-    url: '/user/add',
+    url: '/users/add',
     controller: 'AddUserController',
     templateUrl: 'templates/add.tpl.html'
   });
@@ -123,9 +123,11 @@ Object.defineProperty(exports, '__esModule', {
 var UserController = function UserController($scope, UserService, DataService) {
 
   UserService.checkAuth();
+
   // Fetch the employee Data
   $scope.getEmployee = function (userid) {
     return UserService.getEmployee(userid).then(function (res) {
+      console.log('wat');
       $scope.employee = {};
       console.log(employee);
     });
@@ -146,23 +148,25 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var UserListController = function UserListController($scope, UserService) {
-
-  // Something about this is incorrect:
-  // UserService.getEmployees().then( (res) => {
-  //   $scope.employees = res.data.results;
-  // });
-  // console.log(UserService);
-
+var UserListController = function UserListController($scope, UserService, DataService) {
   $scope.employess = {};
+  $scope.data = {};
 
   UserService.checkAuth();
   UserService.getEmployees().then(function (res) {
-    $scope.employees = res.data.results;
+    console.log(res);
+    $scope.employees = res.data;
   });
+
+  // DataService.getUserCheckins()
+
+  // HERE'S THE FUNCTION THAT THE BUTTON CALLS TO GO TO USER VIEW AND LOAD USERDATA
+  $scope.viewUser = function (id) {
+    $state.go('root.user');
+  };
 };
 
-UserListController.$inject = ['$scope', 'UserService'];
+UserListController.$inject = ['$scope', 'UserService', 'DataService'];
 
 exports['default'] = UserListController;
 module.exports = exports['default'];
@@ -243,21 +247,20 @@ Object.defineProperty(exports, '__esModule', {
 });
 var DataService = function DataService($http, HEROKU, UserService) {
 
-  var locateURL = HEROKU.URL + 'locations/';
-  var checkinURL = HEROKU.URL + 'checkins/';
+  var locateURL = HEROKU.URL + 'locations';
 
   this.getLocations = function (userid) {
     return $http({
-      url: locateURL + userid,
+      url: locateURL,
       headers: HEROKU.CONFIG.headers,
       method: 'GET',
       cache: true
     });
   };
 
-  this.getCheckins = function (userid) {
+  this.getUserCheckins = function (userid) {
     return $http({
-      url: checkinURL + userid,
+      url: HEROKU.URL + '/users/' + userid + '/checkins',
       headers: HEROKU.CONFIG.headers,
       method: 'GET',
       cache: true
@@ -332,22 +335,20 @@ var UserService = function UserService($http, HEROKU, $cookies, $state) {
   };
 
   this.getEmployees = function () {
-    var token = $cookies.get('auth-token');
-    console.log(token);
     return $http({
       url: HEROKU.URL + 'users',
       headers: HEROKU.CONFIG.headers,
-      method: 'GET'
+      method: 'GET',
+      cache: true
     });
   };
 
-  // cache: true
   this.getEmployee = function (empId) {
     return $http({
-      method: 'GET',
       url: HEROKU.URL + 'users/' + empId,
-      headers: HEROKU.CONFIG.headers
-      // cache: true
+      headers: HEROKU.CONFIG.headers,
+      method: 'GET',
+      cache: true
     });
   };
 };

@@ -42,22 +42,20 @@ let UserService = function($http, HEROKU, $cookies, $state) {
   };
 
   this.getEmployees = function () {
-    let token = $cookies.get('auth-token');
-    console.log(token);
     return $http({
       url: HEROKU.URL + 'users',
       headers: HEROKU.CONFIG.headers,
       method: 'GET',
-      // cache: true
+      cache: true
     });
   };
 
   this.getEmployee = function (empId) {
     return $http({
-      method: 'GET',
       url: HEROKU.URL + 'users/' + empId,
-      headers: HEROKU.CONFIG.headers
-      // cache: true
+      headers: HEROKU.CONFIG.headers,
+      method: 'GET',
+      cache: true
     });
   };
 
