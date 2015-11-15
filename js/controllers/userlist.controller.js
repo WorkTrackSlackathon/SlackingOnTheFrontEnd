@@ -1,11 +1,15 @@
+
 let UserListController = function($scope, UserService, DataService, $state, $stateParams) {
+
   $scope.users = {};
   $scope.data = {};
 
   UserService.checkAuth();
   UserService.getEmployees().then( (res) => {
+    console.log(res.data);
     $scope.users = res.data;
   });
+
 
   // DataService.getUserCheckins()
 
@@ -18,6 +22,15 @@ let UserListController = function($scope, UserService, DataService, $state, $sta
   };
 };
 
-UserListController.$inject = ['$scope', 'UserService','DataService','$state','$stateParams'];
 
 export default UserListController;
+UserListController.$inject = ['$scope', 'UserService','DataService','$state','$stateParams'];
+
+// _.findWhere(id, employee.id)
+
+// import _ from 'underscore';
+
+// let UserListController = function($scope, UserService, DataService, $state) {
+//   $scope.employess = {};
+  // $scope.employees = res.data;
+// UserListController.$inject = ['$scope', 'UserService','DataService', '$state'];

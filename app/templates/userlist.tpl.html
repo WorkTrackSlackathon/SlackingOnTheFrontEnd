@@ -10,10 +10,10 @@
           <th></th>
         </tr>
         <tr ng-repeat="user in users">
-          <td><a href="/users/{{ user.id }}">{{ user.id }}</a></td>
-          <td><a href="/users/{{ user.id }}">{{ user.name }}</a></td>
-          <td>Last Check-in</td>
-          <td>Last Location</td>
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.last_checkin_time }}</td>
+          <td>{{ user.last_checkin_place }}</td>
           <td><button ng-click="viewUser(user.id)">View User</button></td>
         </tr>
       </table>
