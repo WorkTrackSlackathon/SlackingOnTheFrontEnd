@@ -1,10 +1,16 @@
 // Put any @imports here                              
 // See Readme for a list of supported ones
 @import "foundation";
+@import 'bourbon';
+@import 'neat';
 
+// Glimpse Colors
 $color1: #263147;
 $color2: #7F8AA2;
 $color3: #FD9800;
+$blueBunting: #263248;
+$greyLight: #9B9B9B;
+$greyBackground: #8C919D;
 
 // Layout & Background styling
 html {
@@ -52,6 +58,34 @@ footer {
     width: 40%;
     margin: 0 auto;
     text-align: center;
+  }
+}
+
+.regForm {
+  border: 1px solid $greyBackground;
+  border-radius: 10px;
+  background: $greyLight;
+  width: 60%;
+  height: 500px;
+  margin-bottom: 2%;
+  margin-left: 20%;
+
+  .input {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 25px;
+    color: #fff;
+  }
+
+  .regField {
+    border: none;
+    border-radius: 5px;
+  }
+
+  .regBtn {
+    width: 60%;
+    border-radius: 10px;
+    margin-left: 18%;
   }
 }
 
