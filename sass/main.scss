@@ -2,13 +2,17 @@
 // See Readme for a list of supported ones
 @import "foundation";
 
+$color1: #263147;
+$color2: #7F8AA2;
+$color3: #FD9800;
+
 // Layout & Background styling
 html {
   height:100%;
 }
 
 body {
-  background: #C0C0C0;
+  background: $color2;
   margin: 15px;
   height:100%;
 }
@@ -52,6 +56,10 @@ footer {
 }
 
 // User List and Page Styling
+table {
+  border-collapse: collapse;
+}
+
 .userlist {
   width: 50%;
   margin: 0 auto;

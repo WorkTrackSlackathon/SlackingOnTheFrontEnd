@@ -27,7 +27,7 @@ var config = function config($stateProvider, $urlRouterProvider) {
     controller: 'UserListController',
     templateUrl: 'templates/userList.tpl.html'
   }).state('root.user', {
-    url: '/users/:userId',
+    url: '/users/:id',
     controller: 'UserController',
     templateUrl: 'templates/user.tpl.html'
   }).state('root.add', {
@@ -133,7 +133,7 @@ var UserController = function UserController($scope, UserService, DataService, $
     console.log($scope.employee.id);
   });
 
-  // Doesn't work - private variable.
+  // Doesn't work - private variable;
   var id = $scope.employee.id;
 
   DataService.getUserCheckins(id).then(function (res) {
@@ -168,7 +168,7 @@ var UserListController = function UserListController($scope, UserService, DataSe
   $scope.viewUser = function (id) {
     console.log(id);
     UserService.getEmployee(id).then(function () {
-      $state.go('root.user');
+      $state.go('root.user/');
     });
   };
 };

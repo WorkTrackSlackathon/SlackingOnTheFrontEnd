@@ -13,7 +13,7 @@ let UserListController = function($scope, UserService, DataService, $state, $sta
   // HERE'S THE FUNCTION THAT THE BUTTON CALLS TO GO TO USER VIEW AND LOAD USERDATA
   $scope.viewUser = function(id) {
     console.log(id);
-    UserService.getEmployee(id).then(() => {$state.go('root.user');
+    UserService.getEmployee(id).then(() => {$state.go('root.user/');
     });
   };
 };

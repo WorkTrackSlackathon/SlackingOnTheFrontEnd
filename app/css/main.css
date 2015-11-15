@@ -6391,7 +6391,7 @@ html {
   height: 100%; }
 
 body {
-  background: #C0C0C0;
+  background: #7F8AA2;
   margin: 15px;
   height: 100%; }
 
@@ -6422,6 +6422,9 @@ footer .footer {
     width: 40%;
     margin: 0 auto;
     text-align: center; }
+
+table {
+  border-collapse: collapse; }
 
 .userlist {
   width: 50%;
