@@ -1,9 +1,9 @@
 <div class="userPage">
   <div class="userInfo">
-    <h3>Employee #{{employee.id}}</h3>
+    <h3>Employee #{{employee.id}} {{employee.name}}</h3>
     <ul>
-      <li>Last Check-in: {{ employee.checkin.timeout}}</li>
-      <li>Last Location: {{ employee.location }}</li>
+      <li>Last Check-in: {{ checkin.timeout}}</li>
+      <li>Last Location: {{ checkin.location }}</li>
     </ul>
   </div>
   <div class="heatmap"></div>

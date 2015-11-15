@@ -120,24 +120,29 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var UserController = function UserController($scope, UserService, DataService) {
+var UserController = function UserController($scope, UserService, DataService, $state, $stateParams) {
 
   UserService.checkAuth();
+  $scope.employee = {};
+  $scope.checkin = {};
 
   // Fetch the employee Data
-  $scope.getEmployee = function (userid) {
-    return UserService.getEmployee(userid).then(function (res) {
-      console.log('wat');
-      $scope.employee = {};
-      console.log(employee);
-    });
-  };
-  $scope.checkins = {};
-  $scope.locations = {};
-  $scope.user = function () {};
+  UserService.getEmployee($stateParams.userId).then(function (res) {
+    // console.log(res);
+    $scope.employee = res.data;
+    console.log($scope.employee.id);
+  });
+
+  // Doesn't work - private variable.
+  var id = $scope.employee.id;
+
+  DataService.getUserCheckins(id).then(function (res) {
+    // console.log(res);
+    $scope.checkin = res.data;
+  });
 };
 
-UserController.$inject = ['$scope', 'UserService', 'DataService'];
+UserController.$inject = ['$scope', 'UserService', 'DataService', '$state', '$stateParams'];
 
 exports['default'] = UserController;
 module.exports = exports['default'];
@@ -148,25 +153,27 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var UserListController = function UserListController($scope, UserService, DataService) {
-  $scope.employess = {};
+var UserListController = function UserListController($scope, UserService, DataService, $state, $stateParams) {
+  $scope.users = {};
   $scope.data = {};
 
   UserService.checkAuth();
   UserService.getEmployees().then(function (res) {
-    console.log(res);
-    $scope.employees = res.data;
+    $scope.users = res.data;
   });
 
   // DataService.getUserCheckins()
 
   // HERE'S THE FUNCTION THAT THE BUTTON CALLS TO GO TO USER VIEW AND LOAD USERDATA
   $scope.viewUser = function (id) {
-    $state.go('root.user');
+    console.log(id);
+    UserService.getEmployee(id).then(function () {
+      $state.go('root.user');
+    });
   };
 };
 
-UserListController.$inject = ['$scope', 'UserService', 'DataService'];
+UserListController.$inject = ['$scope', 'UserService', 'DataService', '$state', '$stateParams'];
 
 exports['default'] = UserListController;
 module.exports = exports['default'];
@@ -260,7 +267,7 @@ var DataService = function DataService($http, HEROKU, UserService) {
 
   this.getUserCheckins = function (userid) {
     return $http({
-      url: HEROKU.URL + '/users/' + userid + '/checkins',
+      url: HEROKU.URL + 'users/' + userid + '/checkins',
       headers: HEROKU.CONFIG.headers,
       method: 'GET',
       cache: true
