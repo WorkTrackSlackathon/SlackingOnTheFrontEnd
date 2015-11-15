@@ -1,5 +1,6 @@
 let NavController = function($scope, UserService, $cookies, $state) {
   
+  
   $scope.logmeout = function() {
     UserService.logout();
   };

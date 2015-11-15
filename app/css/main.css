@@ -6401,6 +6401,15 @@ div .ng-scope {
 section .ng-scope {
   height: 100%; }
 
+.top-bar {
+  background-color: #263147; }
+  .top-bar a {
+    background-color: #263147; }
+  .top-bar a:hover {
+    color: #7F8AA2; }
+  .top-bar img {
+    max-height: 45px; }
+
 footer .footer {
   width: 400px;
   margin: 0 auto; }
@@ -6410,6 +6419,8 @@ footer .footer {
     footer .footer p a {
       text-decoration: none;
       color: #FFFFFF; }
+    footer .footer p a:hover {
+      color: #7F8AA2; }
 
 .login {
   height: 100%;
@@ -6417,11 +6428,44 @@ footer .footer {
   margin: 50px auto; }
   .login form {
     width: 40%;
-    margin: 0 auto; }
+    margin: 0 auto;
+    border: 2px solid #263147;
+    padding: 25px;
+    border-radius: 5px;
+    background-color: #9da5b7; }
+    .login form button {
+      display: block;
+      border-radius: 5px;
+      margin: 0 auto;
+      background-color: #FD9800; }
+    .login form button:hover {
+      border-radius: 0;
+      background-color: #e48900; }
   .login p {
     width: 40%;
     margin: 0 auto;
     text-align: center; }
+
+.regWrap {
+  width: 100%;
+  height: 100%; }
+  .regWrap form {
+    width: 50%;
+    margin: 20px auto;
+    padding: 25px;
+    border: 2px solid #263147;
+    border-radius: 5px;
+    background-color: #9da5b7; }
+    .regWrap form label {
+      margin: 10px 40px 10px 40px; }
+    .regWrap form button {
+      display: block;
+      border-radius: 5px;
+      margin: 0 auto;
+      background-color: #FD9800; }
+    .regWrap form button:hover {
+      border-radius: 0;
+      background-color: #e48900; }
 
 table {
   border-collapse: collapse; }
