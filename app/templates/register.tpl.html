@@ -1,10 +1,10 @@
-<div>
-  <h3>Register New Employee</h3>
-  <form ng-submit='addEmployee(newEmployee)'>
-    <label>Name: <input placeholder='Name of Employee' ng-model='newEmployee.name'></label>
-    <label>Email: <input placeholder='Employee Email' type="email" ng-model='newEmployee.email'></label>
-    <label>Password: <input placeholder='Employee Password' type="password" ng-model='newEmployee.password'></label>
-    <label>Manager Email: <input placeholder="Manager's Email" type="email" ng-model='newEmployee.mgr_id'></label>
+<div class="regWrap">
+  <form class="registration" ng-submit='addEmployee(newEmployee)'>
+    <h3>New Employee Registration</h3>
+    <label><h5>Name:</h5> <input placeholder='Full Name' ng-model='newEmployee.name'></label>
+    <label><h5>Email:</h5> <input placeholder='Email Address' type="email" ng-model='newEmployee.email'></label>
+    <label><h5>Password:</h5> <input placeholder='Password' type="password" ng-model='newEmployee.password'></label>
+    <label><h5>Manager Email:</h5> <input placeholder="Manager's Email" type="email" ng-model='newEmployee.mgr_id'></label>
     <button>Submit</button>
   </form>
 </div>

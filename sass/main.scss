@@ -2,9 +2,12 @@
 // See Readme for a list of supported ones
 @import "foundation";
 
-$color1: #263147;
-$color2: #7F8AA2;
-$color3: #FD9800;
+$color1   :   #263147;
+$color2   :   #7F8AA2;
+$color2L  :   #9da5b7;
+$color3   :   #FD9800;
+$color3L  :   #e48900;
+$boxborder:   2px solid $color1;
 
 // Layout & Background styling
 html {
@@ -24,6 +27,19 @@ section .ng-scope {
   height:100%;
 }
 
+.top-bar {
+  background-color: $color1;
+  a {
+    background-color: $color1;
+  }
+  a:hover {
+    color: $color2;
+  }
+  img {
+    max-height: 45px;
+  }
+}
+
 footer {
   .footer {
     width: 400px;
@@ -34,6 +50,9 @@ footer {
       a {
         text-decoration: none;
         color: #FFFFFF;
+      }
+      a:hover {
+        color: $color2;
       }
     }
   }
@@ -47,11 +66,56 @@ footer {
   form {
     width: 40%;
     margin: 0 auto;
+    border: $boxborder;
+    padding: 25px;
+    border-radius: 5px;
+    background-color: $color2L;
+
+    button {
+      display: block;
+      border-radius: 5px;
+      margin: 0 auto;
+      background-color: $color3;
+    }
+
+    button:hover {
+      border-radius: 0;
+      background-color: $color3L;
+    }
   }
   p {
     width: 40%;
     margin: 0 auto;
     text-align: center;
+  }
+}
+
+.regWrap {
+  width: 100%;
+  height: 100%;
+  form {
+    width: 50%;
+    margin: 20px auto;
+    padding: 25px;
+    border: $boxborder;
+    border-radius: 5px;
+    background-color: $color2L;
+
+    label {
+      margin: 10px 40px 10px 40px;
+    }
+
+    button {
+      display: block;
+      border-radius: 5px;
+      margin: 0 auto;
+      background-color: $color3;
+    }
+
+    button:hover {
+      border-radius: 0;
+      background-color: $color3L;
+    }
   }
 }
 
