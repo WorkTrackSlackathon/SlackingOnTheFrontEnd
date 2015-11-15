@@ -123,39 +123,28 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var UserController = function UserController($scope, UserService, $state, $stateParams, $cookies) {
+var UserController = function UserController($scope, UserService, DataService, $state, $stateParams, $cookies) {
 
+  //Cookie Auth
   UserService.checkAuth();
-  UserService.getEmpCheckins($stateParams.userId).then(function (res) {
+
+  $scope.checkins = {};
+  $scope.employee = {};
+
+  // Fetch Employee Data
+  UserService.getEmployee($stateParams.id).then(function (res) {
+    // console.log(res);
+    $scope.employee = res.data;
+  });
+
+  // Fetch Checkin Data
+  DataService.getUserCheckins($stateParams.id).then(function (res) {
     console.log(res.data);
+    $scope.checkins = res.data;
   });
-  UserService.getEmployee($stateParams.userId).then(function (empRes) {
-    console.log(empRes.data);
-  });
-
-  // let cookies = $cookies.get();
-
-  // UserService.checkAuth();
-  // $scope.employee = {};
-  // $scope.checkin = {};
-
-  // // Fetch the employee Data
-  // UserService.getEmployee($stateParams.userId).then((res) => {
-  //   // console.log(res.data);
-  //   $scope.employee = res.data;
-  //   console.log($scope.employee.id);
-  // });
-
-  // // Doesn't work - private variable;
-  // let id = $scope.employee.id;
-
-  // DataService.getUserCheckins(id).then((res) => {
-  //   // console.log(res);
-  //   $scope.checkin = res.data;
-  // });
 };
 
-UserController.$inject = ['$scope', 'UserService', '$state', '$stateParams', '$cookies'];
+UserController.$inject = ['$scope', 'UserService', 'DataService', '$state', '$stateParams', '$cookies'];
 
 exports['default'] = UserController;
 module.exports = exports['default'];
@@ -178,29 +167,18 @@ var UserListController = function UserListController($scope, UserService, DataSe
     $scope.users = res.data;
   });
 
-  // DataService.getUserCheckins()
-
   // HERE'S THE FUNCTION THAT THE BUTTON CALLS TO GO TO USER VIEW AND LOAD USERDATA
   $scope.viewUser = function (id) {
     console.log(id);
     UserService.getEmployee(id).then(function () {
-      $state.go('root.user/');
+      $state.go('root.user', { id: id });
     });
   };
 };
 
-exports['default'] = UserListController;
-
 UserListController.$inject = ['$scope', 'UserService', 'DataService', '$state', '$stateParams'];
 
-// _.findWhere(id, employee.id)
-
-// import _ from 'underscore';
-
-// let UserListController = function($scope, UserService, DataService, $state) {
-//   $scope.employess = {};
-// $scope.employees = res.data;
-// UserListController.$inject = ['$scope', 'UserService','DataService', '$state'];
+exports['default'] = UserListController;
 module.exports = exports['default'];
 
 },{}],8:[function(require,module,exports){
@@ -383,17 +361,8 @@ var UserService = function UserService($http, HEROKU, $cookies, $state) {
       cache: true
     });
   };
-
-  this.getEmpCheckins = function (userId) {
-    return $http({
-      url: HEROKU.URL + 'users/' + userId + '/checkins',
-      headers: HEROKU.CONFIG.headers,
-      method: 'GET'
-    });
-  };
 };
 
-// cache: true
 UserService.$inject = ['$http', 'HEROKU', '$cookies', '$state'];
 
 exports['default'] = UserService;
