@@ -23,7 +23,7 @@ import DataService from './services/data.service';
 angular
   .module('app', ['ui.router','mm.foundation', 'ngCookies'])
   .constant('HEROKU', {
-    URL: 'http://enigmatic-tundra-6262.herokuapp.com/',
+    URL: 'https://enigmatic-tundra-6262.herokuapp.com/',
     CONFIG: {
       headers: {
         'Content-Type': 'application/json'
