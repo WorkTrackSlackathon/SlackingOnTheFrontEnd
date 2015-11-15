@@ -5,11 +5,11 @@
     </li>
   </ul>
 
-  <section class="top-bar-section">
+  <section class="top-bar-section" ng-controller="NavController">
     <ul class="right">
-      <li><a href="#/">Home</a></li>
+      <li><a href="#/">Login</a></li>
       <li><a href="#/userlist">Profile</a></li>
-      <li><a href="#/logout">Logout</a></li>
+      <li><a href="#" ng-click="logmeout()">Logout</a></li>
     </ul>
   </section>
 </nav>
@@ -20,6 +20,6 @@
 
 <footer class="top-bar">
   <div class="footer">
-    <p><a href="http://www.herokuapp.com">Slackathon</a> &copy; 2015</p>
+    <p><a href="http://www.herokuapp.com">Slackathon &copy; 2015</a></p>
   </div>
 </footer>

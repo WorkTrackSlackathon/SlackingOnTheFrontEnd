@@ -1,24 +1,15 @@
 let UserService = function($http, HEROKU, $cookies, $state) {
-  
-  console.log(HEROKU);
-  
+
   this.checkAuth = function () {
-
     let token = $cookies.get('auth-token');
-
-    HEROKU.CONFIG.headers['Access-Token'] = token;
-    
-    // Something's funky here:
     if (token) {
-      return $http.get(HEROKU.URL + 'check', HEROKU.CONFIG);
+      HEROKU.CONFIG.headers['Access-Token'] = token;
     } else {
       $state.go('root.login');
     }
-
   };
 
   this.sendLogin = function (userObj) {
-    console.log(userObj);
     return $http.post(HEROKU.URL + 'login', userObj, HEROKU.CONFIG);
   };
 
@@ -44,7 +35,33 @@ let UserService = function($http, HEROKU, $cookies, $state) {
 
   this.addEmployee = function (user) {
     let newEmployee = new Registration(user);
+
+  this.getEmployees = function() {
+    return $http.get(HEROKU.URL + 'employees', HEROKU.CONFIG);
+  };
+
+  this.addEmployee = function (id) {
+    let newEmployee = new Registration(id);
+
     return $http.post(HEROKU.URL + 'signup', newEmployee, HEROKU.CONFIG);
+  };
+
+  this.getEmployees = function () {
+    return $http({
+      url: HEROKU.URL,
+      headers: HEROKU.CONFIG.headers,
+      method: 'GET',
+      // cache: true
+    });
+  };
+
+  this.getEmployee = function (empId) {
+    return $http({
+      method: 'GET',
+      url: HEROKU.URL + '/' + empId,
+      headers: HEROKU.CONFIG.headers
+      // cache: true
+    });
   };
 
 };
