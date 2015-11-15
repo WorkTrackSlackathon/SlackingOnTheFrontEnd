@@ -104,13 +104,10 @@ var RegisterController = function RegisterController($scope, UserService, $state
   $scope.addEmployee = function (newUser) {
     UserService.addEmployee(newUser).then(function (res) {
       $scope.newEmployee = {};
-<<<<<<< HEAD
+
       console.log(res);
     });
     $state.go('root.list');
-=======
-    }).then($state.go('root.list'));
->>>>>>> master
   };
 };
 
@@ -204,17 +201,12 @@ var _controllersUserController = require('./controllers/user.controller');
 var _controllersUserController2 = _interopRequireDefault(_controllersUserController);
 
 var _controllersUserlistController = require('./controllers/userlist.controller');
-<<<<<<< HEAD
-
-var _controllersUserlistController2 = _interopRequireDefault(_controllersUserlistController);
-=======
 
 var _controllersUserlistController2 = _interopRequireDefault(_controllersUserlistController);
 
 var _controllersNavController = require('./controllers/nav.controller');
 
 var _controllersNavController2 = _interopRequireDefault(_controllersNavController);
->>>>>>> master
 
 // Import Factories
 
@@ -235,15 +227,9 @@ _angular2['default'].module('app', ['ui.router', 'mm.foundation', 'ngCookies']).
       'Content-Type': 'application/json'
     }
   }
-<<<<<<< HEAD
-}).constant('siteURL', 'www.bob.com').config(_config2['default']).controller('RegisterController', _controllersRegisterController2['default']).controller('LoginController', _controllersLoginController2['default']).controller('UserController', _controllersUserController2['default']).controller('UserListController', _controllersUserlistController2['default']).service('UserService', _servicesUserService2['default']).service('DataService', _servicesDataService2['default']);
-
-},{"./config":1,"./controllers/adduser.controller":2,"./controllers/login.controller":3,"./controllers/register.controller":4,"./controllers/user.controller":5,"./controllers/userlist.controller":6,"./services/data.service":8,"./services/user.service":9,"angular":15,"angular-cookies":11,"angular-foundation":12,"angular-ui-router":13}],8:[function(require,module,exports){
-=======
 }).constant('siteURL', 'www.bob.com').config(_config2['default']).controller('UserListController', _controllersUserlistController2['default']).controller('RegisterController', _controllersRegisterController2['default']).controller('LoginController', _controllersLoginController2['default']).controller('NavController', _controllersNavController2['default']).controller('UserController', _controllersUserController2['default']).service('UserService', _servicesUserService2['default']).service('DataService', _servicesDataService2['default']);
 
 },{"./config":1,"./controllers/adduser.controller":2,"./controllers/login.controller":3,"./controllers/nav.controller":4,"./controllers/register.controller":5,"./controllers/user.controller":6,"./controllers/userlist.controller":7,"./services/data.service":9,"./services/user.service":10,"angular":16,"angular-cookies":12,"angular-foundation":13,"angular-ui-router":14}],9:[function(require,module,exports){
->>>>>>> master
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -312,8 +298,8 @@ var UserService = function UserService($http, HEROKU, $cookies, $state) {
   };
 
   this.loginSuccess = function (res) {
-    $cookies.put('auth-token', res.data.auth_token);
-    HEROKU.CONFIG.headers['Access-Token'] = res.data.auth_token;
+    $cookies.put('auth-token', res.data.user.auth_token);
+    HEROKU.CONFIG.headers['Access-Token'] = res.data.user.auth_token;
     $state.go('root.list');
   };
 
@@ -331,23 +317,18 @@ var UserService = function UserService($http, HEROKU, $cookies, $state) {
     this.role = user.role;
   };
 
-<<<<<<< HEAD
-  this.addEmployee = function (user) {
-    var newEmployee = new Registration(user);
-=======
   this.getEmployees = function () {
     return $http.get(HEROKU.URL + 'employees', HEROKU.CONFIG);
   };
 
   this.addEmployee = function (id) {
     var newEmployee = new Registration(id);
->>>>>>> master
     return $http.post(HEROKU.URL + 'signup', newEmployee, HEROKU.CONFIG);
   };
 
   this.getEmployees = function () {
     return $http({
-      url: HEROKU.URL,
+      url: HEROKU.URL + 'users',
       headers: HEROKU.CONFIG.headers,
       method: 'GET'
     });

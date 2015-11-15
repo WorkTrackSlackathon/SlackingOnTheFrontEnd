@@ -14,8 +14,8 @@ let UserService = function($http, HEROKU, $cookies, $state) {
   };
 
   this.loginSuccess = function (res) {
-    $cookies.put('auth-token', res.data.auth_token);
-    HEROKU.CONFIG.headers['Access-Token'] = res.data.auth_token;
+    $cookies.put('auth-token', res.data.user.auth_token);
+    HEROKU.CONFIG.headers['Access-Token'] = res.data.user.auth_token;
     $state.go('root.list');
   };
 
@@ -33,22 +33,18 @@ let UserService = function($http, HEROKU, $cookies, $state) {
     this.role = user.role;
   };
 
-  this.addEmployee = function (user) {
-    let newEmployee = new Registration(user);
-
   this.getEmployees = function() {
     return $http.get(HEROKU.URL + 'employees', HEROKU.CONFIG);
   };
 
   this.addEmployee = function (id) {
     let newEmployee = new Registration(id);
-
     return $http.post(HEROKU.URL + 'signup', newEmployee, HEROKU.CONFIG);
   };
 
   this.getEmployees = function () {
     return $http({
-      url: HEROKU.URL,
+      url: HEROKU.URL + 'users',
       headers: HEROKU.CONFIG.headers,
       method: 'GET',
       // cache: true
