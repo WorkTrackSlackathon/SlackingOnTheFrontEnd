@@ -1,12 +1,11 @@
-import _ from 'underscore';
 
-let UserListController = function($scope, UserService, DataService, $state) {
-  $scope.employess = {};
+let UserListController = function($scope, UserService, DataService, $state, $stateParams) {
+  $scope.users = {};
   $scope.data = {};
 
   UserService.checkAuth();
   UserService.getEmployees().then( (res) => {
-    $scope.employees = res.data;
+    $scope.users = res.data;
   });
 
 
@@ -15,12 +14,21 @@ let UserListController = function($scope, UserService, DataService, $state) {
 
   // HERE'S THE FUNCTION THAT THE BUTTON CALLS TO GO TO USER VIEW AND LOAD USERDATA
   $scope.viewUser = function(id) {
-    $state.go('root.user');
+    console.log(id);
+    UserService.getEmployee(id).then(() => {$state.go('root.user');
+    });
   };
 };
 
-UserListController.$inject = ['$scope', 'UserService','DataService', '$state'];
 
 export default UserListController;
+UserListController.$inject = ['$scope', 'UserService','DataService','$state','$stateParams'];
 
 // _.findWhere(id, employee.id)
+
+// import _ from 'underscore';
+
+// let UserListController = function($scope, UserService, DataService, $state) {
+//   $scope.employess = {};
+  // $scope.employees = res.data;
+// UserListController.$inject = ['$scope', 'UserService','DataService', '$state'];
