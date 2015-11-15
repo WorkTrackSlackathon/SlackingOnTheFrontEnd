@@ -4,7 +4,8 @@ let RegisterController = function($scope, UserService, $state) {
     UserService.addEmployee(newUser).then ( (res) => {
       $scope.newEmployee = {};
       console.log(res);
-    }).then ($state.go('root.list'));
+    });
+    $state.go('root.list');
     
   };
 

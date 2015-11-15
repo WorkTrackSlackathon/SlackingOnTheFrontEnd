@@ -42,8 +42,8 @@ let UserService = function($http, HEROKU, $cookies, $state) {
     this.role = user.role;
   };
 
-  this.addEmployee = function (id) {
-    let newEmployee = new Registration(id);
+  this.addEmployee = function (user) {
+    let newEmployee = new Registration(user);
     return $http.post(HEROKU.URL + 'signup', newEmployee, HEROKU.CONFIG);
   };
 
