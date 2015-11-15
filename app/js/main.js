@@ -27,7 +27,7 @@ var config = function config($stateProvider, $urlRouterProvider) {
     controller: 'UserListController',
     templateUrl: 'templates/userList.tpl.html'
   }).state('root.user', {
-    url: '/users/:userId',
+    url: '/users/:id',
     controller: 'UserController',
     templateUrl: 'templates/user.tpl.html'
   }).state('root.add', {
@@ -181,7 +181,7 @@ var UserListController = function UserListController($scope, UserService, DataSe
   $scope.viewUser = function (id) {
     console.log(id);
     UserService.getEmployee(id).then(function () {
-      $state.go('root.user');
+      $state.go('root.user/');
     });
   };
 };
