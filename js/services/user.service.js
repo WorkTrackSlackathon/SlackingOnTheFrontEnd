@@ -1,6 +1,4 @@
 let UserService = function($http, HEROKU, $cookies, $state) {
-  
-  // console.log(HEROKU);
 
   this.checkAuth = function () {
     let token = $cookies.get('auth-token');
@@ -10,24 +8,8 @@ let UserService = function($http, HEROKU, $cookies, $state) {
       $state.go('root.login');
     }
   };
-  
-  // this.checkAuth = function () {
-
-  //   let token = $cookies.get('auth-token');
-
-  //   HEROKU.CONFIG.headers['Access-Token'] = token;
-    
-  //   // Something's funky here:
-  //   if (token) {
-  //     return $http.get(HEROKU.URL + 'check', HEROKU.CONFIG);
-  //   } else {
-  //     $state.go('root.login');
-  //   }
-
-  // };
 
   this.sendLogin = function (userObj) {
-    // console.log(userObj);
     return $http.post(HEROKU.URL + 'login', userObj, HEROKU.CONFIG);
   };
 
@@ -52,7 +34,6 @@ let UserService = function($http, HEROKU, $cookies, $state) {
   };
 
   this.addEmployee = function (id) {
-    // console.log(id);
     let newEmployee = new Registration(id);
     return $http.post(HEROKU.URL + 'signup', newEmployee, HEROKU.CONFIG);
   };
