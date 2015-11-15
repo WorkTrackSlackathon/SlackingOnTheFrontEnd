@@ -27,12 +27,12 @@ let config = function($stateProvider, $urlRouterProvider) {
       templateUrl: 'templates/userList.tpl.html'
     })
     .state('root.user', {
-      url: '/user/:userId',
+      url: '/users/:userId',
       controller: 'UserController',
       templateUrl: 'templates/user.tpl.html'
     })
     .state('root.add', {
-      url: '/user/add',
+      url: '/users/add',
       controller: 'AddUserController',
       templateUrl: 'templates/add.tpl.html'
     });
