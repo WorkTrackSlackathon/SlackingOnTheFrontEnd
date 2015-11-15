@@ -1,10 +1,12 @@
 
 let UserListController = function($scope, UserService, DataService, $state, $stateParams) {
+
   $scope.users = {};
   $scope.data = {};
 
   UserService.checkAuth();
   UserService.getEmployees().then( (res) => {
+    console.log(res.data);
     $scope.users = res.data;
   });
 

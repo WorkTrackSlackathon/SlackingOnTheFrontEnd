@@ -120,29 +120,39 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var UserController = function UserController($scope, UserService, DataService, $state, $stateParams) {
+var UserController = function UserController($scope, UserService, $state, $stateParams, $cookies) {
 
   UserService.checkAuth();
-  $scope.employee = {};
-  $scope.checkin = {};
-
-  // Fetch the employee Data
-  UserService.getEmployee($stateParams.userId).then(function (res) {
-    // console.log(res.data);
-    $scope.employee = res.data;
-    console.log($scope.employee.id);
+  UserService.getEmpCheckins($stateParams.userId).then(function (res) {
+    console.log(res.data);
+  });
+  UserService.getEmployee($stateParams.userId).then(function (empRes) {
+    console.log(empRes.data);
   });
 
-  // Doesn't work - private variable;
-  var id = $scope.employee.id;
+  // let cookies = $cookies.get();
 
-  DataService.getUserCheckins(id).then(function (res) {
-    // console.log(res);
-    $scope.checkin = res.data;
-  });
+  // UserService.checkAuth();
+  // $scope.employee = {};
+  // $scope.checkin = {};
+
+  // // Fetch the employee Data
+  // UserService.getEmployee($stateParams.userId).then((res) => {
+  //   // console.log(res.data);
+  //   $scope.employee = res.data;
+  //   console.log($scope.employee.id);
+  // });
+
+  // // Doesn't work - private variable;
+  // let id = $scope.employee.id;
+
+  // DataService.getUserCheckins(id).then((res) => {
+  //   // console.log(res);
+  //   $scope.checkin = res.data;
+  // });
 };
 
-UserController.$inject = ['$scope', 'UserService', 'DataService', '$state', '$stateParams'];
+UserController.$inject = ['$scope', 'UserService', '$state', '$stateParams', '$cookies'];
 
 exports['default'] = UserController;
 module.exports = exports['default'];
@@ -155,11 +165,13 @@ Object.defineProperty(exports, '__esModule', {
 });
 
 var UserListController = function UserListController($scope, UserService, DataService, $state, $stateParams) {
+
   $scope.users = {};
   $scope.data = {};
 
   UserService.checkAuth();
   UserService.getEmployees().then(function (res) {
+    console.log(res.data);
     $scope.users = res.data;
   });
 
@@ -368,8 +380,17 @@ var UserService = function UserService($http, HEROKU, $cookies, $state) {
       cache: true
     });
   };
+
+  this.getEmpCheckins = function (userId) {
+    return $http({
+      url: HEROKU.URL + 'users/' + userId + '/checkins',
+      headers: HEROKU.CONFIG.headers,
+      method: 'GET'
+    });
+  };
 };
 
+// cache: true
 UserService.$inject = ['$http', 'HEROKU', '$cookies', '$state'];
 
 exports['default'] = UserService;
