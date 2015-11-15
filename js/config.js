@@ -24,7 +24,7 @@ let config = function($stateProvider, $urlRouterProvider) {
     .state('root.list', {
       url: '/userlist',
       controller: 'UserListController',
-      templateUrl: 'templates/userList.tpl.html'
+      templateUrl: 'templates/userlist.tpl.html'
     })
     .state('root.user', {
       url: '/users/:id',
