@@ -122,12 +122,17 @@ Object.defineProperty(exports, '__esModule', {
 });
 var UserController = function UserController($scope, UserService, $state, $stateParams, $cookies) {
 
+  $scope.employee = {};
+
   UserService.checkAuth();
+  UserService.getEmployee($stateParams.userId).then(function (empRes) {
+    // console.log(empRes.data);
+    // $scope.employee = empRes.data;
+    console.log(empRes.data);
+  });
+
   UserService.getEmpCheckins($stateParams.userId).then(function (res) {
     console.log(res.data);
-  });
-  UserService.getEmployee($stateParams.userId).then(function (empRes) {
-    console.log(empRes.data);
   });
 
   // let cookies = $cookies.get();

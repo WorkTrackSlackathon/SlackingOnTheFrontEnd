@@ -1,12 +1,18 @@
 let UserController = function($scope, UserService, $state, $stateParams, $cookies) {
   
+  $scope.employee = {};
+
   UserService.checkAuth();
+  UserService.getEmployee($stateParams.userId).then((empRes) => {
+    // console.log(empRes.data);
+    // $scope.employee = empRes.data;
+    console.log(empRes.data);
+  });
+
   UserService.getEmpCheckins($stateParams.userId).then((res) => {
     console.log(res.data);
   });
-  UserService.getEmployee($stateParams.userId).then((empRes) => {
-    console.log(empRes.data);
-  });
+
 
 
   // let cookies = $cookies.get();
