@@ -2,6 +2,7 @@ import angular from 'angular';
 import 'angular-ui-router';
 import 'angular-foundation';
 import 'angular-cookies';
+import 'angular-chart.js';
 
 // Import the Config
 import config from './config';
@@ -13,6 +14,7 @@ import LoginController from './controllers/login.controller';
 import UserController from './controllers/user.controller';
 import UserListController from './controllers/userlist.controller';
 import NavController from './controllers/nav.controller';
+import GraphController from './controllers/graph.controller';
 
 // Import Factories
 
@@ -21,7 +23,7 @@ import UserService from './services/user.service';
 import DataService from './services/data.service';
 
 angular
-  .module('app', ['ui.router','mm.foundation', 'ngCookies'])
+  .module('app', ['ui.router','mm.foundation', 'ngCookies', 'chart.js'])
   .constant('HEROKU', {
     URL: 'https://enigmatic-tundra-6262.herokuapp.com/',
     CONFIG: {
@@ -37,6 +39,7 @@ angular
   .controller('LoginController', LoginController)
   .controller('NavController', NavController)
   .controller('UserController',UserController)
+  .controller('GraphController', GraphController)
   .service('UserService', UserService)
   .service('DataService', DataService)
 ;

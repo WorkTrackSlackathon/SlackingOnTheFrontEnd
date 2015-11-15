@@ -6473,5 +6473,11 @@ table {
     width: 36%; }
   .userPage .heatmap {
     width: 36%; }
+  .userPage .chartGraph {
+    position: absolute;
+    top: 274px;
+    left: 445px;
+    width: 60%;
+    height: 60%; }
 
 /*# sourceMappingURL=main.css.map */
