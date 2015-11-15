@@ -27,11 +27,11 @@ var config = function config($stateProvider, $urlRouterProvider) {
     controller: 'UserListController',
     templateUrl: 'templates/userList.tpl.html'
   }).state('root.user', {
-    url: '/user/:userId',
+    url: '/users/:userId',
     controller: 'UserController',
     templateUrl: 'templates/user.tpl.html'
   }).state('root.add', {
-    url: '/user/add',
+    url: '/users/add',
     controller: 'AddUserController',
     templateUrl: 'templates/add.tpl.html'
   });
@@ -62,9 +62,10 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 var LoginController = function LoginController($scope, UserService, $cookies, $state) {
-
+  UserService.checkAuth();
   $scope.login = function (user) {
     UserService.sendLogin(user).then(function (res) {
+      console.log(res);
       UserService.loginSuccess(res);
     });
   };
@@ -121,9 +122,12 @@ Object.defineProperty(exports, '__esModule', {
 });
 var UserController = function UserController($scope, UserService, DataService) {
 
+  UserService.checkAuth();
+
   // Fetch the employee Data
   $scope.getEmployee = function (userid) {
     return UserService.getEmployee(userid).then(function (res) {
+      console.log('wat');
       $scope.employee = {};
       console.log(employee);
     });
@@ -144,16 +148,25 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var UserListController = function UserListController($scope, UserService) {
+var UserListController = function UserListController($scope, UserService, DataService) {
+  $scope.employess = {};
+  $scope.data = {};
 
-  // UserService.getEmployees().then( (res) => {
-  //   $scope.employees = res.data.results;
-  // });
-  // console.log(UserService);
+  UserService.checkAuth();
+  UserService.getEmployees().then(function (res) {
+    console.log(res);
+    $scope.employees = res.data;
+  });
 
+  // DataService.getUserCheckins()
+
+  // HERE'S THE FUNCTION THAT THE BUTTON CALLS TO GO TO USER VIEW AND LOAD USERDATA
+  $scope.viewUser = function (id) {
+    $state.go('root.user');
+  };
 };
 
-UserListController.$inject = ['$scope', 'UserService'];
+UserListController.$inject = ['$scope', 'UserService', 'DataService'];
 
 exports['default'] = UserListController;
 module.exports = exports['default'];
@@ -234,21 +247,20 @@ Object.defineProperty(exports, '__esModule', {
 });
 var DataService = function DataService($http, HEROKU, UserService) {
 
-  var locateURL = HEROKU.URL + 'locations/';
-  var checkinURL = HEROKU.URL + 'checkins/';
+  var locateURL = HEROKU.URL + 'locations';
 
   this.getLocations = function (userid) {
     return $http({
-      url: locateURL + userid,
+      url: locateURL,
       headers: HEROKU.CONFIG.headers,
       method: 'GET',
       cache: true
     });
   };
 
-  this.getCheckins = function (userid) {
+  this.getUserCheckins = function (userid) {
     return $http({
-      url: checkinURL + userid,
+      url: HEROKU.URL + '/users/' + userid + '/checkins',
       headers: HEROKU.CONFIG.headers,
       method: 'GET',
       cache: true
@@ -295,8 +307,8 @@ var UserService = function UserService($http, HEROKU, $cookies, $state) {
   };
 
   this.loginSuccess = function (res) {
-    $cookies.put('auth-token', res.data.auth_token);
-    HEROKU.CONFIG.headers['Access-Token'] = res.data.auth_token;
+    $cookies.put('auth-token', res.data.user.auth_token);
+    HEROKU.CONFIG.headers['Access-Token'] = res.data.user.auth_token;
     $state.go('root.list');
   };
 
@@ -311,11 +323,10 @@ var UserService = function UserService($http, HEROKU, $cookies, $state) {
     this.email = user.email;
     this.password = user.password;
     this.mgr_id = user.mgr_id;
-    this.role = user.role;
   };
 
   this.getEmployees = function () {
-    return $http.get(HEROKU.URL + 'employees', HEROKU.CONFIG);
+    return $http.get(HEROKU.URL + 'users', HEROKU.CONFIG);
   };
 
   this.addEmployee = function (id) {
@@ -325,19 +336,19 @@ var UserService = function UserService($http, HEROKU, $cookies, $state) {
 
   this.getEmployees = function () {
     return $http({
-      url: HEROKU.URL,
+      url: HEROKU.URL + 'users',
       headers: HEROKU.CONFIG.headers,
-      method: 'GET'
+      method: 'GET',
+      cache: true
     });
   };
 
-  // cache: true
   this.getEmployee = function (empId) {
     return $http({
+      url: HEROKU.URL + 'users/' + empId,
+      headers: HEROKU.CONFIG.headers,
       method: 'GET',
-      url: HEROKU.URL + '/' + empId,
-      headers: HEROKU.CONFIG.headers
-      // cache: true
+      cache: true
     });
   };
 };

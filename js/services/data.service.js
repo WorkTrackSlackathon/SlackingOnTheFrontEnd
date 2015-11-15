@@ -1,20 +1,19 @@
 let DataService = function($http,HEROKU,UserService) {
 
-  let locateURL = HEROKU.URL + 'locations/';
-  let checkinURL = HEROKU.URL + 'checkins/';
+  let locateURL = HEROKU.URL + 'locations';
 
   this.getLocations = function(userid) {   
     return $http({
-      url: locateURL+userid,
+      url: locateURL,
       headers: HEROKU.CONFIG.headers,
       method: 'GET',
       cache: true
     });
   };
 
-  this.getCheckins = function(userid) {   
+  this.getUserCheckins = function(userid) {   
     return $http({
-      url: checkinURL+userid,
+      url: HEROKU.URL+'/users/'+userid+'/checkins',
       headers: HEROKU.CONFIG.headers,
       method: 'GET',
       cache: true

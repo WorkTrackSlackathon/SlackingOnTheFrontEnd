@@ -5,12 +5,16 @@
         <tr>
           <th>Employee ID</th>
           <th>Name</th>
-          <th>Edit User</th>
+          <th>Last Check-in</th>
+          <th>Last Location</th>
+          <th></th>
         </tr>
         <tr ng-repeat="employee in employees">
-          <td><a href="{{URL}}/user/{{ employee.userid }}">{{ employee.userid }}</a></td>
-          <td><a href="{{URL}}/user/{{ employee.userid }}">{{ employee.name }}</a></td>
-          <td><button ng-click="viewUser">View User</button></td>
+          <td><a href="/users/{{ employee.id }}">{{ employee.id }}</a></td>
+          <td><a href="/users/{{ employee.id }}">{{ employee.name }}</a></td>
+          <td>Last Check-in</td>
+          <td>Last Location</td>
+          <td><button ng-click="viewUser()">View User</button></td>
         </tr>
       </table>
   </div>
