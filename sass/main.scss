@@ -3,10 +3,21 @@
 @import "foundation";
 
 // Layout & Background styling
+html {
+  height:100%;
+}
 
 body {
-  background: #e2ebf3;
+  background: #C0C0C0;
   margin: 15px;
+  height:100%;
+}
+
+div .ng-scope {
+  height:100%;
+}
+section .ng-scope {
+  height:100%;
 }
 
 footer {
@@ -24,14 +35,35 @@ footer {
   }
 }
 
+// Login and Registration
+.login {
+  height:100%;
+  width: 70%;
+  margin: 50px auto;
+  form {
+    width: 40%;
+    margin: 0 auto;
+  }
+  p {
+    width: 40%;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
 // User List and Page Styling
 .userlist {
   width: 50%;
   margin: 0 auto;
+  .employList {
+    margin: 0 auto;
+    width: 50%;
+  }
 }
 
 .userPage {
   width: 80%;
+  margin: 0 auto;
   .userinfo {
     width: 36%;
   }

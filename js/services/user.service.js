@@ -30,11 +30,10 @@ let UserService = function($http, HEROKU, $cookies, $state) {
     this.email = user.email;
     this.password = user.password;
     this.mgr_id = user.mgr_id;
-    this.role = user.role;
   };
 
   this.getEmployees = function() {
-    return $http.get(HEROKU.URL + 'employees', HEROKU.CONFIG);
+    return $http.get(HEROKU.URL + 'users', HEROKU.CONFIG);
   };
 
   this.addEmployee = function (id) {
@@ -43,6 +42,8 @@ let UserService = function($http, HEROKU, $cookies, $state) {
   };
 
   this.getEmployees = function () {
+    let token = $cookies.get('auth-token');
+    console.log(token);
     return $http({
       url: HEROKU.URL + 'users',
       headers: HEROKU.CONFIG.headers,
@@ -54,7 +55,7 @@ let UserService = function($http, HEROKU, $cookies, $state) {
   this.getEmployee = function (empId) {
     return $http({
       method: 'GET',
-      url: HEROKU.URL + '/' + empId,
+      url: HEROKU.URL + 'users/' + empId,
       headers: HEROKU.CONFIG.headers
       // cache: true
     });
