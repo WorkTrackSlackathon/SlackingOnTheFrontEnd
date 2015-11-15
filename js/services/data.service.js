@@ -13,7 +13,7 @@ let DataService = function($http,HEROKU,UserService) {
 
   this.getUserCheckins = function(userid) {   
     return $http({
-      url: HEROKU.URL+'/users/'+userid+'/checkins',
+      url: HEROKU.URL+'users/' + userid + '/checkins',
       headers: HEROKU.CONFIG.headers,
       method: 'GET',
       cache: true
