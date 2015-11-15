@@ -121,6 +121,13 @@ Object.defineProperty(exports, '__esModule', {
 });
 var UserController = function UserController($scope, UserService, DataService) {
 
+  // Fetch the employee Data
+  $scope.getEmployee = function (userid) {
+    return UserService.getEmployee(userid).then(function (res) {
+      $scope.employee = {};
+      console.log(employee);
+    });
+  };
   $scope.checkins = {};
   $scope.locations = {};
   $scope.user = function () {};
@@ -211,7 +218,7 @@ var _servicesDataService = require('./services/data.service');
 var _servicesDataService2 = _interopRequireDefault(_servicesDataService);
 
 _angular2['default'].module('app', ['ui.router', 'mm.foundation', 'ngCookies']).constant('HEROKU', {
-  URL: 'http://enigmatic-tundra-6262.herokuapp.com/',
+  URL: 'https://enigmatic-tundra-6262.herokuapp.com/',
   CONFIG: {
     headers: {
       'Content-Type': 'application/json'
@@ -305,6 +312,10 @@ var UserService = function UserService($http, HEROKU, $cookies, $state) {
     this.password = user.password;
     this.mgr_id = user.mgr_id;
     this.role = user.role;
+  };
+
+  this.getEmployees = function () {
+    return $http.get(HEROKU.URL + 'employees', HEROKU.CONFIG);
   };
 
   this.addEmployee = function (id) {

@@ -33,6 +33,10 @@ let UserService = function($http, HEROKU, $cookies, $state) {
     this.role = user.role;
   };
 
+  this.getEmployees = function() {
+    return $http.get(HEROKU.URL + 'employees', HEROKU.CONFIG);
+  };
+
   this.addEmployee = function (id) {
     let newEmployee = new Registration(id);
     return $http.post(HEROKU.URL + 'signup', newEmployee, HEROKU.CONFIG);
