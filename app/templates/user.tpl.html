@@ -1,9 +1,9 @@
 <div class="userPage">
   <div class="userInfo">
-    <h3>{{ empRes.name }}Employee #{{employee.id}} {{employee.name}}</h3>
+    <h3>Employee #{{employee.id}} {{employee.name}}</h3>
     <ul>
-      <li>Last Check-in: {{ checkin.timeout}}</li>
-      <li>Last Location: {{ checkin.location }}</li>
+      <li>Last Check-in: {{ employee.last_checkin_time }}</li>
+      <li>Last Location: {{ employee.last_checkin_place }}</li>
     </ul>
   </div>
   <div class="heatmap"></div>
@@ -16,9 +16,9 @@
         <th>Check-Out Time</th>
       </tr>
       <tr ng-repeat="checkin in checkins">
-        <td>checkin.location</td>
-        <td>checkin.timein</td>
-        <td>checkin.timeout</td>
+        <td>{{checkin.location.title}}</td>
+        <td>{{checkin.time_in}}</td>
+        <td>{{checkin.time_out}}</td>
       </tr>
     </table>
   </div>
